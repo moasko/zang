@@ -16,5 +16,5 @@
 
 ## 📝 Notes
 
-- This is a very basic example from the [react navigation](https://reactnavigation.org/) docs.
-- [Tab navigation documentation](https://reactnavigation.org/docs/tab-based-navigation).
+- ceci est une application mobile fait avec react native 
+elleconsiste a se connecter a l'API de ( react-native-woocommerce-api )
