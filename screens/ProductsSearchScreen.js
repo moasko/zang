@@ -1,51 +1,52 @@
 import React, { useState } from 'react';
-import {Text,View,FlatList,StyleSheet,StatusBar,SafeAreaView,Dimensions,Image,Pressable } from 'react-native';
+import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
 import SearchBar from '../components/fragments/SearchBar'
 import API from '../components/config'
 
 //declaration des variables 
-let SCREEN_WIDTH             = Dimensions.get('window').width
-const BORDER_WIDTH           = 1.5;
+let SCREEN_WIDTH = Dimensions.get('window').width
+const BORDER_WIDTH = 1.5;
 const PRODUCTD_DISPLAY_LIMIT = 30;
-const DEVIS                  = "FCFA";
+const DEVIS = "FCFA";
 
 
 
-const Item = ({ id,url,name,prix,categories,nav,description }) => (
-  <Pressable style={styles.item} onPress={() => nav.navigate('SingleProduct',{name:name,img:url,id:id,des:description})} >
+const Item = ({ id, url, name, prix, categories, nav, description }) => (
+  <Pressable style={styles.item} onPress={() => nav.navigate('SingleProduct', { name: name, img: url, id: id, des: description })} >
     <Image
-        style={styles.productImage}
-        source={{
-          uri: url,
-        }}
-      />
+      style={styles.productImage}
+      source={{
+        uri: url,
+      }}
+    />
 
-<View style={styles.title}>
-   <Text style={{fontSize:10,color:"#6e6e6e"}}>{categories}</Text>
-   <Text style={{fontSize:15}}>{name}</Text>
-   <Text style={{color:"#e84500",fontSize:18,fontWeight:"bold"}}>{prix}{DEVIS}</Text>
-</View>
+    <View style={styles.title}>
+      <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
+      <Text style={{ fontSize: 15 }}>{name}</Text>
+      <Text style={{ color: "#e84500", fontSize: 18, fontWeight: "bold" }}>{prix}{DEVIS}</Text>
+    </View>
   </Pressable>
 );
 
 
 function ProductsSearchScreen({ navigation }) {
-    const [state,setState] = useState('')
-    API.get('products',{per_page: PRODUCTD_DISPLAY_LIMIT
-    })
+  const [state, setState] = useState('')
+  API.get('products', {
+    per_page: PRODUCTD_DISPLAY_LIMIT
+  })
     .then(data => {
-       setState(data) 
+      setState(data)
     })
     .catch(error => {
-        console.log(error);
+      console.log(error);
     });
   const renderItem = ({ item }) => (
-    <Item id={item.id} nav={navigation} url={item.images[0].src} name={item.name} prix={item.sale_price } description={item.short_description} categories={item.categories[0].name}/>
+    <Item id={item.id} nav={navigation} url={item.images[0].src} name={item.name} prix={item.sale_price} description={item.short_description} categories={item.categories[0].name} />
   );
-    return (
+  return (
 
-      <SafeAreaView style={styles.container}>
-        <SearchBar/>
+    <SafeAreaView style={styles.container}>
+      <SearchBar />
       <FlatList
         data={state}
         renderItem={renderItem}
@@ -53,11 +54,11 @@ function ProductsSearchScreen({ navigation }) {
         horizontal={false}
         numColumns={2}
       />
-   
+
     </SafeAreaView>
-  
-  
-    )
+
+
+  )
 }
 const styles = StyleSheet.create({
   container: {
@@ -65,26 +66,26 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    flex:1,
-    flexWrap:"wrap",
-    margin:5,
-    height:250,
-    width:(SCREEN_WIDTH/2),
-    borderColor:"#f77918",
-    borderEndWidth:BORDER_WIDTH,
-    borderLeftWidth:BORDER_WIDTH,
-    borderBottomWidth:BORDER_WIDTH,
-    borderTopWidth:BORDER_WIDTH,
-    borderRadius:8,
-    borderStyle:"dotted"
+    flex: 1,
+    flexWrap: "wrap",
+    margin: 5,
+    height: 250,
+    width: (SCREEN_WIDTH / 2),
+    borderColor: "#f77918",
+    borderEndWidth: BORDER_WIDTH,
+    borderLeftWidth: BORDER_WIDTH,
+    borderBottomWidth: BORDER_WIDTH,
+    borderTopWidth: BORDER_WIDTH,
+    borderRadius: 8,
+    borderStyle: "dotted"
   },
   title: {
-    padding:4,
-  },  
+    padding: 4,
+  },
   productImage: {
-     borderTopLeftRadius:8,
-     borderTopRightRadius:8,
-    width:"100%",
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    width: "100%",
     height: 160,
   },
 });

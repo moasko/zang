@@ -1,6 +1,6 @@
-import {LogBox } from 'react-native';
+import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Remote debugger'])
-import  React from 'react';
+import React from 'react';
 import Tabs from './components/Tabs'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,16 +17,16 @@ const MyStack = () => {
         <Stack.Screen
           name="Home"
           component={Tabs}
-          options={{ 
+          options={{
             title: 'Zangochap',
             headerStyle: {
-            backgroundColor: '#fff',
+              backgroundColor: '#fff',
             },
           }}
-          
+
         />
         <Stack.Screen name="SingleProduct" component={SingleProduct} options={{
-          title:"Detail Produit"
+          title: "Detail Produit"
         }} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -34,6 +34,6 @@ const MyStack = () => {
 };
 export default function App() {
   return (
-<MyStack></MyStack>
+    <MyStack></MyStack>
   );
 }

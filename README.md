@@ -16,5 +16,5 @@
 
 ## 📝 Notes
 
-- ceci est une application mobile fait avec react native 
+- ceci est une application mobile fait avec react native
 elleconsiste a se connecter a l'API de ( react-native-woocommerce-api )

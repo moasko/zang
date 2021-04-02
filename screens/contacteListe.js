@@ -6,7 +6,9 @@ import {View,Text} from 'react-native'
 function ContactesListe(){
     return(
   <View>
-      <Text>moasko</Text>
+       <View>
+          <Text>+224 0575897458</Text>
+      </View>
   </View>
     )
 }
