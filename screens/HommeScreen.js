@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
 import SearchBar from '../components/fragments/SearchBar'
 import HeaderImage from '../components/elements/HeaderImage'
 import API from '../components/config'
+
 
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
 const PRODUCTD_DISPLAY_LIMIT = 30;
 const DEVIS = "FCFA";
+const IMG_PLACEHOLDER ="https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
 
 
@@ -31,21 +33,26 @@ const Item = ({ id, url, name, prix, categories, nav }) => (
 
 
 function HomeScreen({ navigation }) {
-  const [state, setState] = useState('')
+
+     const [state, setState] = useState('')
   API.get('products', {
     per_page: PRODUCTD_DISPLAY_LIMIT
   })
     .then(data => {
-      setState(data)
+   setState(data)
     })
     .catch(error => {
       console.log(error);
     });
-  const renderItem = ({ item }) => (
-    <Item id={item.id} nav={navigation} url={item.images[0].src} name={item.name} prix={item.sale_price} description={item.short_description} categories={item.categories[0].name} />
-  );
-  return (
+ 
+   
 
+  const renderItem = ({ item }) => (
+         <Item id={item.id} nav={navigation} url={(item.images[0]!=undefined)?item.images[0].src:IMG_PLACEHOLDER} name={item.name||"pas nom"} prix={item.sale_price} description={item.short_description} categories={item.categories[0].name} />
+    );
+ 
+  return (
+    
     <SafeAreaView style={styles.container}>
       <SearchBar></SearchBar>
       <FlatList
@@ -61,6 +68,7 @@ function HomeScreen({ navigation }) {
 
 
   )
+
 }
 const styles = StyleSheet.create({
   container: {

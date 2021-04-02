@@ -4,7 +4,7 @@ import SearchBar from '../components/fragments/SearchBar'
 import API from '../components/config'
 
 //declaration des variables 
-let SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
 const PRODUCTD_DISPLAY_LIMIT = 30;
 const DEVIS = "FCFA";
