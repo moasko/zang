@@ -14,8 +14,8 @@ const IMG_PLACEHOLDER ="https://zangochap.ci/wp-content/uploads/woocommerce-plac
 
 
 
-const Item = ({ id, url, name, prix, categories, nav }) => (
-  <Pressable style={styles.item} onPress={() => nav.navigate('SingleProduct', { id: id, img: url })} >
+const Item = ({ id, url, name, prix, categories, nav,description }) => (
+  <Pressable style={styles.item} onPress={() => nav.navigate('SingleProduct', { id:id,img:url,name:name,prix:prix,categories:categories,description:description })} >
     <Image
       style={styles.productImage}
       source={{
@@ -48,7 +48,14 @@ function HomeScreen({ navigation }) {
    
 
   const renderItem = ({ item }) => (
-         <Item id={item.id} nav={navigation} url={(item.images[0]!=undefined)?item.images[0].src:IMG_PLACEHOLDER} name={item.name||"pas nom"} prix={item.sale_price} description={item.short_description} categories={item.categories[0].name} />
+         <Item 
+         id={item.id}
+         nav={navigation} 
+         url={(item.images[0]!=undefined)?item.images[0].src:IMG_PLACEHOLDER}
+         name={item.name||"Aucun nom"} prix={item.sale_price||"00"} 
+         description={item.short_description} 
+         categories={(item.categories[0]!=undefined)?item.categories[0].name:"non classé"} 
+         />
     );
  
   return (

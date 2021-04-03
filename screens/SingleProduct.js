@@ -8,9 +8,8 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 
 function SingleProduct({route,navigation}){
      const [state,setState] = useState('');
-     const [img,setImg] = useState("");
 
-     let {id} = route.params
+     let {id,name,prix,categories,img,description} = route.params
 
     API.get(`products/${id}`)
        .then(data=>{
@@ -28,7 +27,19 @@ function SingleProduct({route,navigation}){
 
     return (
     <ScrollView>
-       <Text>{getImg()}</Text>
+       <Image 
+       style={{
+          width:SCREEN_WIDTH,
+          height:350
+       }}
+       source={{
+          uri:img
+       }}
+       />
+       <Text>{prix}</Text>
+       <Text>{categories}</Text>
+       <Text>{name}</Text>
+      <HTML source={{html:description}}/>
     </ScrollView>
     )
 
