@@ -66,7 +66,7 @@ function HomeScreen({ navigation }) {
         ListHeaderComponent={<HeaderImage></HeaderImage>}
         data={state}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         horizontal={false}
         numColumns={2}
       />

@@ -35,7 +35,7 @@ const Cates = () => {
     <FlatList
       data={state}
       renderItem={renderItem}
-      keyExtractor={item => item.id}
+      keyExtractor={item => item.id.toString()}
       horizontal={true}
     />
 

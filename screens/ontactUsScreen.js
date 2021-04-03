@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
-import { View, FlatList, Image, Dimensions, Text } from 'react-native'
+import {StyleSheet, View, FlatList, Image, Dimensions, Text,Linking } from 'react-native'
 import { Header } from 'react-native-elements'
 
 
+const PHONE_1 = "+225 0584472464"
+const SCREEN_WIDTH = Dimensions.get('screen').width
 function ContactUsScreen() {
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View>
-          <Text>+224 0575897458</Text>
+        <View>
+      <View style={styles.constacts}>
+          <Text>+224 05758978</Text>
       </View>
-      <View>
-          <Text>+224 0575897458</Text>
+      <View style={styles.constacts}>
+          <Text>{PHONE_1}</Text>
       </View>
         </View>
     )
 }
+ 
+const styles =  StyleSheet.create({
+
+    constacts:{
+        padding:11,
+        backgroundColor:"orange",
+        width:SCREEN_WIDTH,
+        marginBottom:5
+
+    }
+})
 
 export default ContactUsScreen
