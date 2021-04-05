@@ -4,22 +4,25 @@ import SearchBar from '../components/fragments/SearchBar'
 import API from '../components/config'
 
 //declaration des variables 
-const SCREEN_WIDTH = Dimensions.get('window').width
-const BORDER_WIDTH = 1.5;
+
+const PARAMS ={
+  SCREEN_WIDTH : Dimensions.get('window').width,
+  BORDER_WIDTH  :1.5,
+}
 const PRODUCTD_DISPLAY_LIMIT = 30;
 const DEVIS = "FCFA";
 
 
-
 const Item = ({ id, url, name, prix, categories, nav, description }) => (
-  <Pressable style={styles.item} onPress={() => nav.navigate('SingleProduct', { name: name, img: url, id: id, des: description })} >
+  <Pressable
+    style={styles.item}
+    onPress={() => nav.navigate('SingleProduct', { name: name, img: url, id: id, des: description })} >
     <Image
       style={styles.productImage}
       source={{
         uri: url,
       }}
     />
-
     <View style={styles.title}>
       <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
       <Text style={{ fontSize: 15 }}>{name}</Text>
@@ -27,21 +30,30 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
     </View>
   </Pressable>
 );
-
+const montres = "montres"
 
 function ProductsSearchScreen({ navigation }) {
   const [state, setState] = useState('')
-  API.get('products', {
+  API.get(`products?categories?slug=${montres}`, {
     per_page: PRODUCTD_DISPLAY_LIMIT
   })
     .then(data => {
       setState(data)
+      console.log(data)
     })
     .catch(error => {
       console.log(error);
     });
   const renderItem = ({ item }) => (
-    <Item id={item.id} nav={navigation} url={item.images[0].src} name={item.name} prix={item.sale_price} description={item.short_description} categories={item.categories[0].name} />
+    <Item
+      id={item.id}
+      nav={navigation}
+      url={item.images[0].src}
+      name={item.name}
+      prix={item.sale_price}
+      description={item.short_description}
+      categories={item.categories[0].name}
+    />
   );
   return (
 
@@ -70,12 +82,12 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     margin: 5,
     height: 250,
-    width: (SCREEN_WIDTH / 2),
+    width: (PARAMS.SCREEN_WIDTH / 2),
     borderColor: "#f77918",
-    borderEndWidth: BORDER_WIDTH,
-    borderLeftWidth: BORDER_WIDTH,
-    borderBottomWidth: BORDER_WIDTH,
-    borderTopWidth: BORDER_WIDTH,
+    borderEndWidth: PARAMS.BORDER_WIDTH,
+    borderLeftWidth: PARAMS.BORDER_WIDTH,
+    borderBottomWidth: PARAMS.BORDER_WIDTH,
+    borderTopWidth: PARAMS.BORDER_WIDTH,
     borderRadius: 8,
     borderStyle: "dotted"
   },

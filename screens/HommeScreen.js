@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
 import SearchBar from '../components/fragments/SearchBar'
 import HeaderImage from '../components/elements/HeaderImage'
@@ -10,12 +10,14 @@ let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
 const PRODUCTD_DISPLAY_LIMIT = 30;
 const DEVIS = "FCFA";
-const IMG_PLACEHOLDER ="https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
+const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
 
 
-const Item = ({ id, url, name, prix, categories, nav,description }) => (
-  <Pressable style={styles.item} onPress={() => nav.navigate('SingleProduct', { id:id,img:url,name:name,prix:prix,categories:categories,description:description })} >
+const Item = ({ id, url, name, prix, categories, nav, description }) => (
+  <Pressable
+    style={styles.item}
+    onPress={() => nav.navigate('SingleProduct', { id: id, img: url, name: name, prix: prix, categories: categories, description: description })} >
     <Image
       style={styles.productImage}
       source={{
@@ -33,33 +35,32 @@ const Item = ({ id, url, name, prix, categories, nav,description }) => (
 
 
 function HomeScreen({ navigation }) {
-
-     const [state, setState] = useState('')
+  const [state, setState] = useState('')
   API.get('products', {
     per_page: PRODUCTD_DISPLAY_LIMIT
   })
     .then(data => {
-   setState(data)
+      setState(data)
     })
     .catch(error => {
       console.log(error);
     });
- 
-   
+
+
 
   const renderItem = ({ item }) => (
-         <Item 
-         id={item.id}
-         nav={navigation} 
-         url={(item.images[0]!=undefined)?item.images[0].src:IMG_PLACEHOLDER}
-         name={item.name||"Aucun nom"} prix={item.sale_price||"00"} 
-         description={item.short_description} 
-         categories={(item.categories[0]!=undefined)?item.categories[0].name:"non classé"} 
-         />
-    );
- 
+    <Item
+      id={item.id}
+      nav={navigation}
+      url={(item.images[0] != undefined) ? item.images[0].src : IMG_PLACEHOLDER}
+      name={item.name || "Aucun nom"} prix={item.sale_price || "00"}
+      description={item.short_description}
+      categories={(item.categories[0] != undefined) ? item.categories[0].name : "non classé"}
+    />
+  );
+
   return (
-    
+
     <SafeAreaView style={styles.container}>
       <SearchBar></SearchBar>
       <FlatList
