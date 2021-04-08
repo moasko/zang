@@ -76,8 +76,6 @@ function HomeScreen({ navigation }) {
       />
 
     </SafeAreaView>
-
-
   )
 
 }

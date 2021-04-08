@@ -36,11 +36,12 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 function ProductsSearchScreen({ navigation }) {
   const [state, setState] = useState('')
   useEffect(()=>{
-  API.get('products', {
-    per_page: PRODUCTD_DISPLAY_LIMIT
+  API.get('products',{
+    category:37
   })
     .then(data => {
       setState(data)
+      console.log(data)
     })
     .catch(error => {
       console.log(error);
