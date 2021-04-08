@@ -4,7 +4,7 @@ import Cate from './Categoris'
 
 
 let SCREEN_WIDTH = Dimensions.get('window').width
-const url = "https://scontent.fabj2-1.fna.fbcdn.net/v/t1.0-9/s960x960/136950995_100476275357808_5655216116538638056_o.jpg?_nc_cat=111&ccb=1-3&_nc_sid=e3f864&_nc_eui2=AeEJwy0rEjjVE5tgbLdnCEPPqLokvS2VKhSouiS9LZUqFCxQT4z3NnO8vClyRhgptmMANNJVvbW5WWL5JnFKgz-w&_nc_ohc=LGlHx8jcaHQAX-ejIrE&_nc_ht=scontent.fabj2-1.fna&tp=7&oh=8572eff82d910d7492727075b339c9df&oe=60874192";
+const url = "https://scontent-cdt1-1.xx.fbcdn.net/v/t1.6435-0/p180x540/168383776_106610331533931_7643711852637877031_n.jpg?_nc_cat=110&ccb=1-3&_nc_sid=e3f864&_nc_ohc=WAhioqzwtzQAX_3gr5F&_nc_ht=scontent-cdt1-1.xx&tp=6&oh=347c0ce2cf1278a99a19773ffcf89598&oe=60935E6D";
 function HeaderImage() {
     return (
         <View>

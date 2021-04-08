@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Image, Dimensions, Text } from 'react-native'
-import { Header } from 'react-native-elements'
+import { Header, Button } from 'react-native-elements'
 import HTML from 'react-native-render-html'
 import API from '../components/config'
 
@@ -21,25 +21,46 @@ function SingleProduct({ route, navigation }) {
       })
 
    return (
-      <ScrollView>
-         <Image
-            style={{
-               width: SCREEN_WIDTH,
-               height: 350
-            }}
-            source={{
-               uri: img
-            }}
-         />
-          <View style={{padding:12}}>
-         <Text>{prix}</Text>
-         <Text>{categories}</Text>
-         <Text>{name}</Text>
-        
-            <HTML source={{ html: description||"<code>Aucune description</code>" }} contentWidth={SCREEN_WIDTH}/>
+      <View style={{ flex: 1 }}>
+         <ScrollView>
+            <Image
+               style={{
+                  width: SCREEN_WIDTH,
+                  height: 350
+               }}
+               source={{
+                  uri: img
+               }}
+            />
+            <View style={{ padding: 12 }}>
+               <Text style={{color:"#e76300",fontSize:35,fontWeight:"600"}}>{prix} CFR</Text>
+               <Text style={{color:"gray",fontSize:20,fontWeight:"600"}}>{categories}</Text>
+               <Text style={{color:"#000",fontSize:35,fontWeight:"600"}}>{name}</Text>
+
+               <HTML source={{ html:`<html> <body>${description}</body> </html>`  || "<code>Aucune description</code>" }} contentWidth={SCREEN_WIDTH} />
+            </View>
+         </ScrollView>
+
+         <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 20 }}>
+            <Button
+               title="Acheter"
+               buttonStyle={{
+                  backgroundColor: "orange",
+                  width: 110
+               }}
+            />
+            <Button
+               title="ajouter au panier"
+               buttonStyle={{
+                  backgroundColor: "green",
+                  width: 150
+
+               }}
+            />
+
          </View>
 
-      </ScrollView>
+      </View>
    )
 
 }

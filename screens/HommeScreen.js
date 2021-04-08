@@ -8,8 +8,8 @@ import API from '../components/config'
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
-const PRODUCTD_DISPLAY_LIMIT = 30;
-const DEVIS = "FCFA";
+const PRODUCTD_DISPLAY_LIMIT = 40;
+const DEVIS = "CFA";
 const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
 
@@ -28,7 +28,7 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
     <View style={styles.title}>
       <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
       <Text style={{ fontSize: 15 }}>{name}</Text>
-      <Text style={{ color: "#e84500", fontSize: 18, fontWeight: "bold" }}>{prix}{DEVIS}</Text>
+      <Text style={{ color: "#e84500", fontSize: 18, fontWeight: "bold" }}>{prix} {DEVIS}</Text>
     </View>
   </Pressable>
 );
@@ -36,6 +36,7 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 
 function HomeScreen({ navigation }) {
   const [state, setState] = useState('')
+  useEffect(()=>{
   API.get('products', {
     per_page: PRODUCTD_DISPLAY_LIMIT
   })
@@ -45,6 +46,8 @@ function HomeScreen({ navigation }) {
     .catch(error => {
       console.log(error);
     });
+  },[])
+
 
 
 

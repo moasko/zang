@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, FlatList, Image, Dimensions, Text,Linking } from 'react-native'
-import { Header } from 'react-native-elements'
+import { StyleSheet, View,Dimensions, Text } from 'react-native'
 
 
 const PHONE_1 = "+225 0584472464"
@@ -9,23 +8,23 @@ function ContactUsScreen() {
 
     return (
         <View>
-      <View style={styles.constacts}>
-          <Text>+224 05758978</Text>
-      </View>
-      <View style={styles.constacts}>
-          <Text>{PHONE_1}</Text>
-      </View>
+            <View style={styles.constacts}>
+                <Text>+224 05758978</Text>
+            </View>
+            <View style={styles.constacts}>
+                <Text>{PHONE_1}</Text>
+            </View>
         </View>
     )
 }
- 
-const styles =  StyleSheet.create({
 
-    constacts:{
-        padding:11,
-        backgroundColor:"orange",
-        width:SCREEN_WIDTH,
-        marginBottom:5
+const styles = StyleSheet.create({
+
+    constacts: {
+        padding: 11,
+        backgroundColor: "orange",
+        width: SCREEN_WIDTH,
+        marginBottom: 5
 
     }
 })
