@@ -20,7 +20,7 @@ function HeaderImage() {
                     uri: url
                 }}
             />
-            <Cate></Cate>
+       
         </View>
 
     )
