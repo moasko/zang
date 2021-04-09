@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet, Text, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView } from 'react-native';
 import API from '../config'
 
-const Item = ({ title, img }) => (
-  <View style={styles.item}>
-    <View style={styles.contour}>
-      <Image
-        style={styles.img}
-        source={{
-          uri: img,
-          cache: 'only-if-cached'
-        }}
-      />
-    </View>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+const CateItem = ({ id, title, img }) => {
+  const navigation = useNavigation();
+  return (
+    <Pressable
+      style={styles.item}
+      onPress={() => navigation.navigate('ViewCat', {id:id, title: title })}>
+      <View style={styles.contour}>
+        <Image
+          style={styles.img}
+          source={{
+            uri: img
+          }}
+        />
+      </View>
+      <Text style={styles.title}>{title}</Text>
+    </Pressable>
+  )
+};
 
 const Cates = () => {
   const [state, setState] = useState('');
@@ -27,17 +32,24 @@ const Cates = () => {
       console.log(e)
     })
 
-  const renderItem = ({ item }) => (
-    <Item title={item.name} img={item.image.src} />
+  const CatrenderItem = ({ item }) => (
+    <CateItem
+      id={item.id}
+      title={item.name}
+      img={item.image.src}
+    />
   );
 
   return (
-    <FlatList
-      data={state}
-      renderItem={renderItem}
-      keyExtractor={item => item.id.toString()}
-      horizontal={true}
-    />
+    <SafeAreaView>
+      <FlatList
+        data={state}
+        renderItem={CatrenderItem}
+        keyExtractor={item => item.id.toString()}
+        horizontal={true}
+      />
+    </SafeAreaView>
+
 
   );
 }

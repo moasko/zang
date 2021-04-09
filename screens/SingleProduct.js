@@ -6,7 +6,7 @@ import API from '../components/config'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-function SingleProduct({ route, navigation }) {
+function SingleProduct({ route}) {
    const [state, setState] = useState('');
 
    let { id, name, prix, categories, img, description } = route.params

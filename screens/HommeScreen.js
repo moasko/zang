@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
 import SearchBar from '../components/fragments/SearchBar'
-import HeaderImage from '../components/elements/HeaderImage'
+import Cate  from '../components/elements/Categoris'
 import API from '../components/config'
 
 
@@ -11,7 +11,6 @@ const BORDER_WIDTH = 1.5;
 const PRODUCTD_DISPLAY_LIMIT = 40;
 const DEVIS = "CFA";
 const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
-
 
 
 const Item = ({ id, url, name, prix, categories, nav, description }) => (
@@ -65,9 +64,8 @@ function HomeScreen({ navigation }) {
   return (
 
     <SafeAreaView style={styles.container}>
-      <SearchBar></SearchBar>
       <FlatList
-        ListHeaderComponent={<HeaderImage></HeaderImage>}
+        ListHeaderComponent={<Cate></Cate>}
         data={state}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}

@@ -5,6 +5,8 @@ import Tabs from './components/Tabs'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SingleProduct from './screens/SingleProduct'
+import ByCategoriesScreen from './screens/ByCategoriesScreen'
+import { startClock } from 'react-native-reanimated';
 
 
 
@@ -23,11 +25,12 @@ const MyStack = () => {
               backgroundColor: '#fff',
             },
           }}
-
         />
         <Stack.Screen name="SingleProduct" component={SingleProduct} options={{
           title: "Detail Produit"
         }} />
+
+        <Stack.Screen name={"ViewCat"} component={ByCategoriesScreen} options={{ title: "leste des categories" }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
