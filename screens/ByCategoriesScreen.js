@@ -50,7 +50,6 @@ function ByCategoriesScreen({navigation,route }) {
     })
       .then(data => {
         setState(data)
-        console.log(data)
       })
       .catch(error => {
         console.log(error);

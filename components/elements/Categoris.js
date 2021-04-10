@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView } from 'react-native';
 import API from '../config'
@@ -8,7 +8,7 @@ const CateItem = ({ id, title, img }) => {
   return (
     <Pressable
       style={styles.item}
-      onPress={() => navigation.navigate('ViewCat', {id:id, title: title })}>
+      onPress={() => navigation.navigate('ViewCat', { id: id, title: title })}>
       <View style={styles.contour}>
         <Image
           style={styles.img}
@@ -24,13 +24,24 @@ const CateItem = ({ id, title, img }) => {
 
 const Cates = () => {
   const [state, setState] = useState('');
-  API.get('products/categories')
-    .then(data => {
-      setState(data)
-    })
-    .catch(e => {
-      console.log(e)
-    })
+  try {
+    useEffect(() => {
+      API.get('products/categories')
+        .then(data => {
+          new Promise((resolved,rejected) => {
+            setTimeout(() => {
+              resolved(setState(data))
+            }, 1000)
+          })
+
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }, [])
+  } catch (e) {
+    console.log(e)
+  }
 
   const CatrenderItem = ({ item }) => (
     <CateItem
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 50,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
-    padding: 3,
+    padding: 5,
     backgroundColor: '#e84500',
   },
   title: {
