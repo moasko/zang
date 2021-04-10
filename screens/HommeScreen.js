@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
+import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Pressable } from 'react-native';
+import CachedImage from 'react-native-expo-cached-image';
+
 import Cate from '../components/elements/Categoris'
 import API from '../components/config'
 
 
 //declaration des variables 
-let SCREEN_WIDTH = Dimensions.get('window').width
-const BORDER_WIDTH = 1.5;
-const PRODUCTD_DISPLAY_LIMIT = 40;
+const SCREEN_WIDTH = Dimensions.get('window').width
+const PROCUVTS_CARDES_BORDER_WIDTH = 1.5;
+const PRODUCTD_DISPLAY_LIMIT = 24;
 const DEVIS = "CFA";
-const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
+const PROUCTS_IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
 
-const Item = ({ id, url, name, prix, categories, nav, description }) => (
+
+
+const Item = ({ id, url, name, prix, preprix ,categories, nav, description }) =>{
+  return (
   <Pressable
     style={styles.item}
     onPress={() => nav.navigate('SingleProduct', { id: id, img: url, name: name, prix: prix, categories: categories, description: description })} >
-    <Image
-      style={styles.productImage}
-      source={{
-        uri: url,
-      }}
-    />
+
+ <CachedImage style={styles.productImage} source={{ uri: url }}/>
 
     <View style={styles.title}>
       <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
       <Text style={{ fontSize: 15 }}>{name}</Text>
-      <Text style={{ color: "#e84500", fontSize: 18, fontWeight: "bold" }}>{prix} {DEVIS}</Text>
+      <Text style={{ color: "#ffd5b8", fontSize: 14, fontWeight: "bold",fontStyle:"italic"}}>{preprix} {DEVIS}</Text>
+      <Text style={{ color: "#e84500", fontSize: 20, fontWeight: "bold" }}>{prix} {DEVIS}</Text>
     </View>
   </Pressable>
 );
+} 
 
 
 function HomeScreen({ navigation }) {
@@ -53,8 +56,10 @@ function HomeScreen({ navigation }) {
     <Item
       id={item.id}
       nav={navigation}
-      url={(item.images[0] != undefined) ? item.images[0].src : IMG_PLACEHOLDER}
-      name={item.name || "Aucun nom"} prix={item.sale_price || "00"}
+      url={(item.images[0] != undefined) ? item.images[0].src : PROUCTS_IMG_PLACEHOLDER}
+      name={item.name || "Aucun nom"} 
+      prix={item.sale_price || "00"}
+      preprix={item.regular_price}
       description={item.short_description}
       categories={(item.categories[0] != undefined) ? item.categories[0].name : "non classé"}
     />
@@ -67,9 +72,10 @@ function HomeScreen({ navigation }) {
         ListHeaderComponent={<Cate></Cate>}
         data={state}
         renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => (item.id).toString()}
         horizontal={false}
-        numColumns={2}
+        numColumns={(SCREEN_WIDTH>=600) ? 3 : 2}
+        removeClippedSubviews={true}
       />
 
     </SafeAreaView>
@@ -79,19 +85,18 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
   },
   item: {
     flex: 1,
     flexWrap: "wrap",
     margin: 5,
-    height: 250,
+    height: 270,
     width: (SCREEN_WIDTH / 2),
     borderColor: "#f77918",
-    borderEndWidth: BORDER_WIDTH,
-    borderLeftWidth: BORDER_WIDTH,
-    borderBottomWidth: BORDER_WIDTH,
-    borderTopWidth: BORDER_WIDTH,
+    borderEndWidth: PROCUVTS_CARDES_BORDER_WIDTH,
+    borderLeftWidth: PROCUVTS_CARDES_BORDER_WIDTH,
+    borderBottomWidth: PROCUVTS_CARDES_BORDER_WIDTH,
+    borderTopWidth: PROCUVTS_CARDES_BORDER_WIDTH,
     borderRadius: 8,
     borderStyle: "dotted"
   },

@@ -16,7 +16,7 @@ function Searcher() {
                     borderBottomLeftRadius: 50,
                     borderTopRightRadius: 50,
                     borderBottomRightRadius: 50,
-                    height: 30
+                    height: 36
                 }
             }
             containerStyle={

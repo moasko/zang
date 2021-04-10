@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView } from 'react-native';
 import API from '../config'
+import Searcher from '../fragments/SearchBar'
 
 const CateItem = ({ id, title, img }) => {
   const navigation = useNavigation();
@@ -53,6 +54,7 @@ const Cates = () => {
 
   return (
     <SafeAreaView>
+      <Searcher></Searcher>
       <FlatList
         data={state}
         renderItem={CatrenderItem}
