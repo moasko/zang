@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
-import SearchBar from '../components/fragments/SearchBar'
-import Cate  from '../components/elements/Categoris'
+import Cate from '../components/elements/Categoris'
 import API from '../components/config'
 
 
@@ -35,17 +34,17 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 
 function HomeScreen({ navigation }) {
   const [state, setState] = useState('')
-  useEffect(()=>{
-  API.get('products', {
-    per_page: PRODUCTD_DISPLAY_LIMIT
-  })
-    .then(data => {
-      setState(data)
+  useEffect(() => {
+    API.get('products', {
+      per_page: PRODUCTD_DISPLAY_LIMIT
     })
-    .catch(error => {
-      console.log(error);
-    });
-  },[])
+      .then(data => {
+        setState(data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [])
 
 
 
