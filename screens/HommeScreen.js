@@ -27,8 +27,8 @@ const Item = ({ id, url, name, prix, preprix ,categories, nav, description }) =>
     <View style={styles.title}>
       <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
       <Text style={{ fontSize: 15 }}>{name}</Text>
-      <Text style={{ color: "#ffd5b8", fontSize: 14, fontWeight: "bold",fontStyle:"italic"}}>{preprix} {DEVIS}</Text>
-      <Text style={{ color: "#e84500", fontSize: 20, fontWeight: "bold" }}>{prix} {DEVIS}</Text>
+      <Text style={{ color: "#ffd5b8", fontSize: 10, fontWeight: "bold",fontStyle:"italic"}}>{preprix} {DEVIS}</Text>
+      <Text style={{ color: "#e84500", fontSize: 15, fontWeight: "bold" }}>{prix} {DEVIS}</Text>
     </View>
   </Pressable>
 );
@@ -43,6 +43,7 @@ function HomeScreen({ navigation }) {
     })
       .then(data => {
         setState(data)
+        console.log(state)
       })
       .catch(error => {
         console.log(error);
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
     margin: 5,
-    height: 270,
+    height: 260,
     width: (SCREEN_WIDTH / 2),
     borderColor: "#f77918",
     borderEndWidth: PROCUVTS_CARDES_BORDER_WIDTH,
