@@ -1,5 +1,4 @@
-import { LogBox,Image,Text,View } from 'react-native';
-LogBox.ignoreLogs(['Remote debugger'])
+import { LogBox,Image,Text,View} from 'react-native';
 import React from 'react';
 import Tabs from './components/Tabs'
 import { NavigationContainer } from '@react-navigation/native';
@@ -27,9 +26,9 @@ function LogoTitle() {
 const MyStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="home">
         <Stack.Screen
-          name="Home"
+          name="home"
           component={Tabs}
           options={{
             headerTitle: props => <LogoTitle {...props} />,
@@ -42,7 +41,7 @@ const MyStack = () => {
           title: "Detail Produit"
         }} />
 
-        <Stack.Screen name={"ViewCat"} component={ByCategoriesScreen} options={{ title: "leste des categories" }} />
+        <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ title: "leste des categories" }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
