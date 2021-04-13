@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 //screens import 
@@ -18,7 +17,6 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <SafeAreaProvider>
-
       <Tab.Navigator>
 
         <Tab.Screen name="Home" component={HomeScreen} options={{
@@ -51,7 +49,6 @@ function Tabs() {
             ),
           }} />
       </Tab.Navigator>
-
     </SafeAreaProvider>
   );
 }

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
-import HeaderImage from '../components/elements/HeaderImage'
 import API from '../components/config'
- 
+
 
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
@@ -40,9 +39,9 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 );
 
 
-function ByCategoriesScreen({navigation,route }) {
+function ByCategoriesScreen({ navigation, route }) {
   const [state, setState] = useState('')
-  const{id}=route.params
+  const { id } = route.params
 
   useEffect(() => {
     API.get('products', {
