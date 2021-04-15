@@ -35,7 +35,7 @@ const Item = ({ id, url, name, prix, preprix, categories, nav, description }) =>
 
 
 function HomeScreen({ navigation }) {
-  const [state, setState] = useState('')
+  const [state, setState] = useState('');
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -68,7 +68,6 @@ function HomeScreen({ navigation }) {
   );
 
   return (
-
     <SafeAreaView style={styles.container}>
       {isLoading ?<View style={{flex:1,justifyContent:"center",alignItems:"center"}}><ActivityIndicator size="large" color="#f77918" /></View>  : (
         <FlatList
