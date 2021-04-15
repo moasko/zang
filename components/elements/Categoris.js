@@ -25,25 +25,17 @@ const CateItem = ({ id, title, img }) => {
 
 const Cates = () => {
   const [state, setState] = useState('');
-  try {
-    useEffect(() => {
-      API.get('products/categories')
-        .then(data => {
-          new Promise((resolved,rejected) => {
-            setTimeout(() => {
-              resolved(setState(data))
-            }, 1000)
-          })
 
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    }, [])
-  } catch (e) {
-    console.log(e)
-  }
-
+  useEffect(() => {
+    API.get('products/categories')
+      .then(data => {
+        setState(data)
+        console.log(data)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }, [])
   const CatrenderItem = ({ item }) => (
     <CateItem
       id={item.id}

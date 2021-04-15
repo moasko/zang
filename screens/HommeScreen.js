@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Pressable } from 'react-native';
-import CachedImage from 'react-native-expo-cached-image';
+import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Pressable,Image } from 'react-native';
 
 import Cate from '../components/elements/Categoris'
 import API from '../components/config'
@@ -22,7 +21,7 @@ const Item = ({ id, url, name, prix, preprix, categories, nav, description }) =>
       style={styles.item}
       onPress={() => nav.navigate('SingleProduct', { id: id, img: url, name: name, prix: prix, categories: categories, description: description })} >
 
-      <CachedImage style={styles.productImage} source={{ uri: url }} />
+      <Image style={styles.productImage} source={{ uri: url }} />
 
       <View style={styles.title}>
         <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
@@ -45,7 +44,6 @@ function HomeScreen({ navigation }) {
     })
       .then(data => {
         setState(data)
-        console.log(state)
       })
       .catch(error => {
         console.log(error);
@@ -72,7 +70,7 @@ function HomeScreen({ navigation }) {
   return (
 
     <SafeAreaView style={styles.container}>
-      {isLoading ? <ActivityIndicator size="large" color="#00ff00" /> : (
+      {isLoading ?<View style={{flex:1,justifyContent:"center",alignItems:"center"}}><ActivityIndicator size="large" color="#f77918" /></View>  : (
         <FlatList
           ListHeaderComponent={<Cate></Cate>}
           data={state}
