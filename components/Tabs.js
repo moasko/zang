@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HommeScreen'
 import ProductsSearchScreen from '../screens/ProductsSearchScreen';
 import ContactUsScreen from '../screens/ontactUsScreen';
 import PromoScreeen from '../screens/PromoScreeen';
+import Panier from '../screens/Panier';
 
 
 //variables declaration
@@ -34,10 +35,10 @@ function Tabs() {
         }} />
 
         <Tab.Screen
-          name="mon compte" component={PromoScreeen} options={{
-            tabBarLabel: 'Promo',
+          name="mon compte" component={Panier} options={{
+            tabBarLabel: 'Panier',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="ticket-percent-outline" color={color} size={size} />
+              <MaterialCommunityIcons name="basket" color={color} size={size} />
             ),
           }} />
 

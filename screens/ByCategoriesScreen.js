@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
+import {ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
 import API from '../components/config'
 
 
@@ -32,7 +32,7 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 
     <View style={styles.title}>
       <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
-      <Text style={{ fontSize: 15 }}>{name}</Text>
+      <Text numberOfLines={1} style={{ fontSize: 15 }}>{name}</Text>
       <Text style={{ color: "#e84500", fontSize: 18, fontWeight: "bold" }}>{prix} {DEVIS}</Text>
     </View>
   </Pressable>
@@ -41,18 +41,20 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 
 function ByCategoriesScreen({ navigation, route }) {
   const [state, setState] = useState('')
+  const [isloading,setLoading] = useState(true)
   const { id } = route.params
 
   useEffect(() => {
     API.get('products', {
-      category: id
+      category: id.toString()
     })
       .then(data => {
         setState(data)
       })
       .catch(error => {
         console.log(error);
-      });
+      })
+      .finally(()=>setLoading(false));
   }, [])
 
 
@@ -70,15 +72,15 @@ function ByCategoriesScreen({ navigation, route }) {
   );
 
   return (
-
     <SafeAreaView style={styles.container}>
+    {isloading ?<View style={{flex:1,justifyContent:"center",alignItems:"center"}}><ActivityIndicator size="large" color="#f77918" /></View>  : (
       <FlatList
         data={state}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
         horizontal={false}
         numColumns={2}
-      />
+      />)}
 
     </SafeAreaView>
 

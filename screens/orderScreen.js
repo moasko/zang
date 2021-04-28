@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { View, Text, TextInput, StyleSheet, Button, ScrollView, Dimensions, ActivityIndicator, Pressable,TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import API from '../components/config';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
 
+const myIcon = <Icon name="cart-outline" size={30} color="#fff" />;
+const checkmark = <Icon name="checkmark" size={40} color="green"  />;
+function GetDate(){
+  let d = new Date()
+  let h = d.getHours()
+return h>=17? (<Text style={{padding:15 ,fontWeight:"bold",textAlign:"center"}}>une commercial va prendre contact avec vous d'he demain a partir de 8H</Text>):(<Text>une commercial va prendre contact avec vous dans moin de 2 minuts</Text>)
+}
 
-function Loading(){
-  return(
+function Loading() {
+  return (
     <View style={{
       width: SCREEN_WIDTH,
       height: SCREEN_HEIGHT - 80,
@@ -33,16 +42,54 @@ function Loading(){
   )
 }
 
+
+
+
+function Loaded() {
+  const navigation = useNavigation();
+  return (
+    <View style={{
+      width: SCREEN_WIDTH,
+      height: SCREEN_HEIGHT - 80,
+      position: "absolute",
+      backgroundColor: "rgba(52, 52, 52, 0.8)",
+      zIndex: 56,
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+      <View style={{
+        padding:15,
+        width: "85%",
+        height: 250,
+        backgroundColor: "#fff",
+        borderRadius: 15,
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column"
+      }}>
+        <Text style={{color:"#696969",marginBottom: 17, fontSize:20, fontWeight: "bold",textAlign:"center" }}>Votre Commande a bien été valider</Text>
+        <Text>{checkmark}</Text>
+       <GetDate/>
+        <TouchableOpacity style={styles.customBtn} onPress={()=>navigation.navigate('home')} >
+          <Text style={{color:"#fff",fontSize:15,textAlign:"center"}}>continué</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+}
+
 const OrderScreen = ({ route }) => {
   let { id } = route.params
-  const [code, setCode] = useState(id.toString())
+  const [code, setCode] = useState(null)
   const [nom, setNom] = useState(null)
   const [prenom, setPrenom] = useState(null)
   const [tel1, setTel1] = useState(null)
   const [tel2, setTel2] = useState(null)
   const [lieu, setLieu] = useState(null)
-  const [respons,setRespons] =useState('')
+
+  const [respons, setRespons] = useState('')
   const [isLoading, setLoading] = useState(false);
+  const [isLoaded,setLoaded]=useState(false)
 
   let data = {
     payment_method: "bacs",
@@ -67,7 +114,7 @@ const OrderScreen = ({ route }) => {
       address_2: "",
       city: lieu,
       state: "AB",
-      postcode: "94103",
+      postcode: "",
       country: "CI"
     },
     line_items: [
@@ -80,31 +127,37 @@ const OrderScreen = ({ route }) => {
       {
         method_id: "flat_rate",
         method_title: "Flat Rate",
-        total: "10.00"
+        total: "1000"
       }
     ]
   }
 
   const Post = () => {
+    setLoading(true)
     API.post('orders', data)
       .then(response => {
         setRespons(response)
       })
       .catch(error => {
         console.log(error.response.data);
-      }).finally(()=>setLoading(false))
+      }).finally(() => {
+        setLoading(false)
+        setLoaded(true)
+      })
   }
 
 
   return (
-    <View style={{ padding: 5 }}>
-      {isLoading ?<Loading></Loading>:null}
+    <View style={{ padding: 5}}>
+      {isLoading ? <Loading/> : null} 
+      {isLoaded ? <Loaded/>:null}
       <ScrollView>
         <Text style={styles.title}>VALIDATION DE COMMANDE</Text>
         <View>
-          <View style={{ padding: 10, borderWidth: 2, borderColor: "red", marginBottom: 20 }}>
+          <View style={{ padding: 10, marginBottom: 20,backgroundColor:"#039181" ,borderRadius:10}}>
             <Text style={{ textAlign: "center" }}>Avez vous un code promo ?</Text>
-            <TextInput style={styles.inputStyle} placeholder="Lieu de livraison" onChangeText={setCode} value={code} />
+            <Text style={{color:"#ffffff",textAlign:"center",marginBottom:10,marginTop:10}}>vous n'etre pas abliger de remprire ce champ si vous n'avez pas de code coupon </Text>
+            <TextInput style={styles.inputStyle} placeholder="Votre code promo" onChangeText={setCode} value={code} />
           </View>
 
           <Text>Nom</Text>
@@ -120,9 +173,27 @@ const OrderScreen = ({ route }) => {
 
 
         </View>
-        <Button onPress={Post} title="valider la commande" />
+
+ <Pressable onPress={Post} style={{alignItems:"flex-end"}}>
+          <View style={{
+            width: 150,
+            height: 60,
+            padding: 10,
+            borderRadius: 50,
+            backgroundColor: "#e76300",
+            justifyContent: "center",
+            alignItems: "center"
+          }}>
+            <Text style={{
+              fontSize: 22,
+              textAlign: "center",
+              color: "#fff",
+            }}>{myIcon}</Text>
+          </View>
+        </Pressable>
       </ScrollView>
 
+       
 
     </View>
   )
@@ -132,7 +203,7 @@ const OrderScreen = ({ route }) => {
 const styles = StyleSheet.create({
   inputStyle: {
     marginBottom: 10,
-    padding: 6,
+    padding: 10,
     borderRadius: 10,
     backgroundColor: "#dbdbdb"
   },
@@ -142,6 +213,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     marginTop: 10
+  },
+  customBtn:{
+    backgroundColor:"#3880d1",
+    padding:15,
+    width:"100%",
+borderRadius:7
   }
 })
 

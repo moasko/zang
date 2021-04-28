@@ -1,10 +1,14 @@
+
 import { LogBox,Image,Text,View} from 'react-native';
-import React from 'react';
+import React,{useState,useContext} from 'react';
 import Tabs from './components/Tabs'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SingleProduct from './screens/SingleProduct'
 import ByCategoriesScreen from './screens/ByCategoriesScreen'
+import OrderScreen from './screens/orderScreen';
+import PanierContext from './screens/PanierContext';
+
 
 
 
@@ -24,6 +28,8 @@ function LogoTitle() {
 }
 
 const MyStack = () => {
+
+  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="home">
@@ -41,13 +47,26 @@ const MyStack = () => {
           title: "Detail Produit"
         }} />
 
-        <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ title: "leste des categories" }} />
+        <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ title: "liste des categories" }} />
+        <Stack.Screen name="order" component={OrderScreen} options={{title:"Panier"}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
+
 export default function App() {
+  const [cart,setCart]=useState()
+  const [catlList,stCartList] = useState([])
+
+  const hendleAdd=()=>{
+    
+  }
+
   return (
-    <MyStack></MyStack>
+    <PanierContext.Provider value={}>
+          <MyStack></MyStack>
+    </PanierContext.Provider>
+
   );
 }

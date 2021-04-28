@@ -3,6 +3,7 @@ import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAre
 
 import Cate from '../components/elements/Categoris'
 import API from '../components/config'
+import Panier from './Panier';
 
 
 //declaration des variables 

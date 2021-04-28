@@ -30,7 +30,6 @@ const Cates = () => {
     API.get('products/categories')
       .then(data => {
         setState(data)
-        console.log(data)
       })
       .catch(e => {
         console.log(e)

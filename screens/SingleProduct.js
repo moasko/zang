@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, ScrollView, Image, Dimensions, Text, StyleSheet, Pressable } from 'react-native'
 import HTML from 'react-native-render-html'
 import API from '../components/config'
+import AddToCartBtn from '../components/elements/AddToCartBtn';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 function SingleProduct({ route }) {
+   const navigation = useNavigation();
    const [state, setState] = useState('');
 
    let { id, name, prix, categories, img, description } = route.params
    useEffect(() => {
+      const abortController = new AbortController();
+      const signal = abortController.signal;
+      
       API.get(`products/${id}`)
          .then(data => {
             setState(data)
-            console.log(data)
          })
          .catch(e => {
             throw e
          })
    }, [])
-   Image.prefetch(img)
    return (
       <View style={{ flex: 1 }}>
          <ScrollView>
@@ -36,26 +40,19 @@ function SingleProduct({ route }) {
                <Text style={{ color: "#e76300", fontSize: 35, fontWeight: "600" }}>{prix} CFR</Text>
                <Text style={{ color: "gray", fontSize: 20, fontWeight: "600" }}>{categories}</Text>
                <Text style={{ color: "#000", fontSize: 35, fontWeight: "600" }}>{name}</Text>
-               <Text>{(state.id=="")? "loading...":state.id}</Text>
+               <Text>{(state.id == "") ? "loading..." : state.id}</Text>
                <HTML source={{ html: `<html> <body>${description}</body> </html>` || "<code>Aucune description</code>" }} contentWidth={SCREEN_WIDTH} />
             </View>
          </ScrollView>
 
          <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <Pressable>
-               <View style={{
-                  width: (SCREEN_WIDTH / 2),
-                  backgroundColor: '#e76300'
-               }}>
-                  <Text style={styles.btnText}>Ajouter au panier</Text>
-               </View>
-            </Pressable>
-            <Pressable>
+            <AddToCartBtn id={id.toString()} />
+            <Pressable onPress={() => navigation.navigate('order', { id: id })}>
                <View style={{
                   width: (SCREEN_WIDTH / 2),
                   backgroundColor: '#006dd2'
                }}>
-                  <Text style={styles.btnText}>Commander</Text>
+                  <Text style={styles.btnText}>Acheter</Text>
                </View>
             </Pressable>
 
