@@ -10,7 +10,7 @@ function SingleProduct({ route }) {
    const navigation = useNavigation();
    const [state, setState] = useState('');
 
-   let { id, name, prix, categories, img, description } = route.params
+   let { id, name, prix, categories, img, description,permalink } = route.params
    useEffect(() => {
       const abortController = new AbortController();
       const signal = abortController.signal;
@@ -40,13 +40,15 @@ function SingleProduct({ route }) {
                <Text style={{ color: "#e76300", fontSize: 35, fontWeight: "600" }}>{prix} CFR</Text>
                <Text style={{ color: "gray", fontSize: 20, fontWeight: "600" }}>{categories}</Text>
                <Text style={{ color: "#000", fontSize: 35, fontWeight: "600" }}>{name}</Text>
-               <Text>{(state.id == "") ? "loading..." : state.id}</Text>
+               <Text>{permalink}</Text>
+               {(state.id == "") ? <Text>"Loading..."</Text>:<Text>{state.id}</Text>}
+              
                <HTML source={{ html: `<html> <body>${description}</body> </html>` || "<code>Aucune description</code>" }} contentWidth={SCREEN_WIDTH} />
             </View>
          </ScrollView>
 
          <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <AddToCartBtn id={id.toString()} />
+            <AddToCartBtn id={id.toString()} permalink={permalink} />
             <Pressable onPress={() => navigation.navigate('order', { id: id })}>
                <View style={{
                   width: (SCREEN_WIDTH / 2),

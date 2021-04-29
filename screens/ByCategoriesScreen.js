@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
 import API from '../components/config'
 
-
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;

@@ -3,36 +3,19 @@ import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAre
 
 import Cate from '../components/elements/Categoris'
 import API from '../components/config'
-import Panier from './Panier';
+import Item from '../components/ProductCard/ProductCard'
+
 
 
 //declaration des variables 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const PROCUVTS_CARDES_BORDER_WIDTH = 1.5;
 const PRODUCTD_DISPLAY_LIMIT = 24;
-const DEVIS = "CFA";
 const PROUCTS_IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
 
 
 
-const Item = ({ id, url, name, prix, preprix, categories, nav, description }) => {
-  return (
-    <Pressable
-      style={styles.item}
-      onPress={() => nav.navigate('SingleProduct', { id: id, img: url, name: name, prix: prix, categories: categories, description: description })} >
-
-      <Image style={styles.productImage} source={{ uri: url }} />
-
-      <View style={styles.title}>
-        <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
-        <Text numberOfLines={1} style={{ fontSize: 15 }}>{name}</Text>
-        <Text style={{ color: "#ffd5b8", fontSize: 10, fontWeight: "bold", fontStyle: "italic" }}>{preprix} {DEVIS}</Text>
-        <Text style={{ color: "#e84500", fontSize: 15, fontWeight: "bold" }}>{prix} {DEVIS}</Text>
-      </View>
-    </Pressable>
-  );
-}
 
 
 function HomeScreen({ navigation }) {
@@ -65,6 +48,7 @@ function HomeScreen({ navigation }) {
       preprix={item.regular_price}
       description={item.short_description}
       categories={(item.categories[0] != undefined) ? item.categories[0].name : "non classé"}
+      permalink={item.permalink}
     />
   );
 
