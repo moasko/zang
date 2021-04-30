@@ -48,9 +48,6 @@ function ProductsSearchScreen({ navigation }) {
   const [isloading, setLoading] = useState(true)
   const [search, setSearch] = useState()
  
-
-
- 
     useEffect(() => {
       API.get('products', {
         search: search
