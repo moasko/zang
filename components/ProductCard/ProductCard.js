@@ -13,7 +13,7 @@ const Item = ({ id, url, name, prix, preprix, categories, nav, description,perma
         <View style={Style.title}>
           <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
           <Text numberOfLines={1} style={{ fontSize: 15 }}>{name}</Text>
-          <Text style={{ color: "#ffd5b8", fontSize: 10, fontWeight: "bold", fontStyle: "italic" }}>{preprix} {DEVIS}</Text>
+          <Text style={{ color: "#ffd5b8", fontSize: 10, fontWeight: "bold", fontStyle: "italic" }}>{preprix} {PARAMS.DEVIS}</Text>
           <Text style={{ color: "#e84500", fontSize: 15, fontWeight: "bold" }}>{prix} {PARAMS.DEVIS}</Text>
         </View>
       </Pressable>

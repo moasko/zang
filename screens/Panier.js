@@ -1,106 +1,94 @@
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
+import React, { useState, useEffect, useRef } from 'react';
+import { Text, View, Button, Platform } from 'react-native';
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
-import React, { useState } from 'react';
+export default function Panier() {
+  const [expoPushToken, setExpoPushToken] = useState('ExponentPushToken[U6jzUPFaLIeVk8xyq1oXq4]');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  Linking,
-} from 'react-native';
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
 
-const Panier = () => {
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [whatsAppMsg, setWhatsAppMsg] = useState(
-   
-  );
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
 
-  const initiateWhatsAppSMS = () => {
-    // Check for perfect 10 digit length
-    if (mobileNumber.length != 10) {
-      alert('Please insert correct contact number');
-      return;
-    }
-    // Using 91 for India
-    // You can change 91 with your country code
-    let url =
-      'whatsapp://send?text=' + whatsAppMsg + '&phone=+225' + mobileNumber;
-    Linking.openURL(url)
-      .then((data) => {
-        console.log('WhatsApp Opened');
-      })
-      .catch(() => {
-        alert('Make sure Whatsapp installed on your device');
-      });
-  };
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <Text style={styles.titleText}>
-          Example to Send WhatsApp Message from React Native App
-        </Text>
-        <Text style={styles.titleTextsmall}>Enter WhatsApp Number</Text>
-        <TextInput
-          value={mobileNumber}
-          onChangeText={(mobileNumber) => setMobileNumber(mobileNumber)}
-          placeholder={'Enter WhatsApp Number'}
-          keyboardType="numeric"
-          style={styles.textInput}
-        />
-        <Text style={styles.titleTextsmall}>WhatsApp Message</Text>
-        <TextInput
-          value={whatsAppMsg}
-          onChangeText={(whatsAppMsg) => setWhatsAppMsg(whatsAppMsg)}
-          placeholder={'WhatsApp Message'}
-          style={styles.textInput}
-        />
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.buttonStyle}
-          onPress={initiateWhatsAppSMS}>
-          <Text style={styles.buttonTextStyle}>Send WhatsApp Message</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}>
+      <Text>Your expo push token: {expoPushToken}</Text>
+      <Button
+        title="Press to schedule a notification"
+        onPress={async () => {
+          await schedulePushNotification();
+        }}
+      />
+    </View>
   );
-};
+}
 
-export default Panier;
+async function schedulePushNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "ZANGOCHAP PROMO",
+      body: '10000% de reduction sur zangochap',
+      data: { data: 'voir' },
+    },
+    trigger: { seconds: 2 },
+  });
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 10,
-  },
-  titleText: {
-    fontSize: 22,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  titleTextsmall: {
-    marginVertical: 8,
-    fontSize: 16,
-  },
-  buttonStyle: {
-    justifyContent: 'center',
-    marginTop: 15,
-    padding: 10,
-    backgroundColor: '#8ad24e',
-  },
-  buttonTextStyle: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  textInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: '100%',
-    paddingHorizontal: 10,
-  },
-});
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  return token;
+}

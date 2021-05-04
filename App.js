@@ -7,6 +7,7 @@ import SingleProduct from './screens/SingleProduct'
 import ByCategoriesScreen from './screens/ByCategoriesScreen'
 import OrderScreen from './screens/orderScreen';
 
+LogBox.ignoreLogs(['Remote debugger']);
 
 const Stack = createStackNavigator();
 

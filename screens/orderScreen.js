@@ -98,7 +98,7 @@ const OrderScreen = ({ route }) => {
     billing: {
       first_name: nom,
       last_name: prenom,
-      address_1: "",
+      address_1: tel2,
       address_2: "",
       city: lieu,
       state: "CI",
@@ -110,7 +110,7 @@ const OrderScreen = ({ route }) => {
     shipping: {
       first_name: nom,
       last_name: prenom,
-      address_1: "",
+      address_1: tel2,
       address_2: "",
       city: lieu,
       state: "AB",
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     backgroundColor:"#3880d1",
     padding:15,
     width:"100%",
-borderRadius:7
+    borderRadius:7
   }
 })
 

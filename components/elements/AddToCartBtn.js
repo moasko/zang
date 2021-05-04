@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { View, Pressable, Text, Dimensions, StyleSheet, Linking } from 'react-native';
+import { View, Pressable, Text, StyleSheet, Linking } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import PARAMS from '../../config/contes'
 
-const SCREEN_WIDTH = Dimensions.get('window').width
-const AddToCartBtn = ({ id, permalink }) => {
+const AddToCartBtn = ({ id, permalink,prix,name,img}) => {
 
     const initiateWhatsAppSMS = () => {
         const PhoneNumber = "+2250584472464"
         const text = `
         Salut Zangochap je souhaite passer une commande de ce produit
-    %0a%0a*Nom du produit* : name
-    %0a*Prix*:7000
-    %0a*Lien du produit*:${permalink}`
+    %0a*Nom du produit* : ${name}
+    %0a*Prix*:${prix} ${PARAMS.DEVIS}
+    %0a*Produit sur le site*:${permalink}`
 
         let url =
             'whatsapp://send?text=' + text + '&phone=' + PhoneNumber;
@@ -20,15 +20,15 @@ const AddToCartBtn = ({ id, permalink }) => {
                 console.log('WhatsApp Opened');
             })
             .catch(() => {
-                alert('Make sure Whatsapp installed on your device');
+                alert('Assurez-vous que Whatsapp est installé sur votre appareil'); 
             });
     };
     return (
 
         <Pressable onPress={() => initiateWhatsAppSMS()} >
             <View style={{
-                width: (SCREEN_WIDTH / 2),
-                backgroundColor: 'green'
+                width: (PARAMS.SCREEN_WIDTH / 2),
+                backgroundColor: '#0ac352'
             }}>
                 <Text style={styles.btnText}> <MaterialCommunityIcons name="basket" color={"#fff"} size={20} /> WhatsApp</Text>
             </View>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: '#fff',
         textAlign: "center",
-        padding: 15
+        padding: 9
     }
 })
 

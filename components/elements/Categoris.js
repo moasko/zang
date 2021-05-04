@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView } from 'react-native';
 import API from '../config'
+import PARAMS from '../../config/contes';
 
 
 const CateItem = ({ id, title, img }) => {
@@ -39,7 +40,7 @@ const Cates = () => {
     <CateItem
       id={item.id}
       title={item.name}
-      img={item.image.src}
+      img={(item.image!= undefined) ? item.image.src : PARAMS.PROUCTS_IMG_PLACEHOLDER}
     />
   );
 
