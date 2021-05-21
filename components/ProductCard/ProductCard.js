@@ -19,8 +19,4 @@ const Item = ({ id, url, name, prix, preprix, categories, nav, description,perma
       </Pressable>
     );
   }
-
-  
-  
-  
   export default Item

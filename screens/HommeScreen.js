@@ -9,7 +9,7 @@ import PARAMS from '../config/contes';
 import Item from '../components/ProductCard/ProductCard'
 
 //declaration des variables 
-const PRODUCTD_DISPLAY_LIMIT = 20;
+const PRODUCTD_DISPLAY_LIMIT = 40;
 
 
 
@@ -50,12 +50,24 @@ function HomeScreen({ navigation }) {
     <SafeAreaView style={{flex:1}}>
       {isLoading ?<View style={{flex:1,justifyContent:"center",alignItems:"center"}}><ActivityIndicator size="large" color="#f77918" /></View>  : (
         <FlatList
+        ItemSeparatorComponent={
+          Platform.OS !== 'android' &&
+          (({ highlighted }) => (
+            <View
+              style={[
+                style.separator,
+                highlighted && { marginLeft: 0 }
+              ]}
+            />
+          ))
+        }
           ListHeaderComponent={<Cate></Cate>}
           data={state}
           renderItem={renderItem}
           keyExtractor={item => (item.id).toString()}
           horizontal={false}
           numColumns={(PARAMS.SCREEN_WIDTH >= 600) ? 3 : 2}
+          refreshing={true}
           removeClippedSubviews
          initialNumToRender={2} 
          maxToRenderPerBatch={1}
