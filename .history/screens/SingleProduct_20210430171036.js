@@ -30,7 +30,7 @@ function SingleProduct({ route }) {
             <Image
                style={{
                   width: PARAMS.SCREEN_WIDTH,
-                  height: 400
+                  height: 350
                }}
                source={{
                   uri: img

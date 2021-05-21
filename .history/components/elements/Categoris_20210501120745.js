@@ -5,18 +5,6 @@ import API from '../config'
 import PARAMS from '../../config/contes';
 
 
-
-
-function ViewAll(){
-  const navigation1 = useNavigation();
-  return(
-    <View style={styles.alllign}>
-      <Text style={{color:"#fff",fontWeight:"700"}}>PRODUISTS</Text>
-     <Pressable onPress={()=>navigation1.navigate('allProducts')}><Text style={{color:"#fff"}}>{"Voir Tout >>"}</Text></Pressable> 
-    </View>
-  )
-  
-}
 const CateItem = ({ id, title, img }) => {
   const navigation = useNavigation();
   return (
@@ -64,7 +52,6 @@ const Cates = () => {
         keyExtractor={item => item.id.toString()}
         horizontal={true}
       />
-      <ViewAll/>
     </SafeAreaView>
 
 
@@ -107,18 +94,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 9,
   },
-  alllign:{
-    width:PARAMS.SCREEN_WIDTH,
-    justifyContent:'space-between',
-    flexDirection:'row',
-    paddingRight:10,
-    paddingLeft:10,
-    paddingTop:15,
-    paddingBottom:15,
-    backgroundColor:'red',
-    borderTopLeftRadius:10,
-    borderTopRightRadius:10
-  }
 });
 
 export default Cates;

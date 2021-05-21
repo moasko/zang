@@ -11,7 +11,7 @@ const Style = {
       flex: 1,
       flexWrap: "wrap",
       margin: 5,
-      height: 300,
+      height: 260,
       width: (PARAMS.SCREEN_WIDTH / 2),
       borderColor: "#f77918",
       borderEndWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,

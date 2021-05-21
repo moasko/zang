@@ -8,11 +8,10 @@ import PARAMS from '../../config/contes';
 
 
 function ViewAll(){
-  const navigation1 = useNavigation();
   return(
     <View style={styles.alllign}>
-      <Text style={{color:"#fff",fontWeight:"700"}}>PRODUISTS</Text>
-     <Pressable onPress={()=>navigation1.navigate('allProducts')}><Text style={{color:"#fff"}}>{"Voir Tout >>"}</Text></Pressable> 
+      <Text style={{color:"#fff",fontWeight:"7000"}}>PRODUISTS</Text>
+     <Pressable onPress={()=>{console.log("cc")}}><Text style={{color:"#fff"}}>{"Voir Tout >>"}</Text></Pressable> 
     </View>
   )
   

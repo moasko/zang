@@ -6,7 +6,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SingleProduct from './screens/SingleProduct'
 import ByCategoriesScreen from './screens/ByCategoriesScreen'
 import OrderScreen from './screens/orderScreen';
-import AllProducts from './screens/AllProducts';
 
 LogBox.ignoreLogs(['Remote debugger']);
 
@@ -45,7 +44,6 @@ const MyStack = () => {
 
         <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ title: "liste des categories" }} />
         <Stack.Screen name="order" component={OrderScreen} options={{title:"Panier"}}/>
-        <Stack.Screen name="allProducts" component={AllProducts} options={{title:"Tout les produits"}}/>
       </Stack.Navigator>
     </NavigationContainer>
 

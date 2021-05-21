@@ -8,11 +8,10 @@ import PARAMS from '../../config/contes';
 
 
 function ViewAll(){
-  const navigation1 = useNavigation();
   return(
     <View style={styles.alllign}>
-      <Text style={{color:"#fff",fontWeight:"700"}}>PRODUISTS</Text>
-     <Pressable onPress={()=>navigation1.navigate('allProducts')}><Text style={{color:"#fff"}}>{"Voir Tout >>"}</Text></Pressable> 
+      <Text>PRODUISTS</Text>
+      <Text>Voir Tous</Text>
     </View>
   )
   
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
     paddingLeft:10,
     paddingTop:15,
     paddingBottom:15,
-    backgroundColor:'red',
+    backgroundColor:'orange',
     borderTopLeftRadius:10,
     borderTopRightRadius:10
   }
