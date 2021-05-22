@@ -11,13 +11,13 @@ Notifications.setNotificationHandler({
 });
 
 export default function Panier() {
-  const [expoPushToken, setExpoPushToken] = useState('ExponentPushToken[U6jzUPFaLIeVk8xyq1oXq4]');
+  const [expoPushToken, setExpoPushToken] = useState('ExponentPushToken[U6jzUPFaLIeVk8xyq1oXq]');
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    //registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
       setNotification(notification);
@@ -40,7 +40,6 @@ export default function Panier() {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
-      <Text>Your expo push token: {expoPushToken}</Text>
       <Button
         title="Press to schedule a notification"
         onPress={async () => {
@@ -62,7 +61,9 @@ async function schedulePushNotification() {
   });
 }
 
-async function registerForPushNotificationsAsync() {
+
+
+/* async function registerForPushNotificationsAsync() {
   let token;
   if (Constants.isDevice) {
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
@@ -91,4 +92,4 @@ async function registerForPushNotificationsAsync() {
   }
 
   return token;
-}
+} */
