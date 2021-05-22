@@ -9,7 +9,7 @@ import SearchBar from '../components/SearchBar/SearchBar';
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
-const PRODUCTD_DISPLAY_LIMIT = 20;
+const PRODUCTD_DISPLAY_LIMIT = 2;
 const DEVIS = "CFA";
 const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
@@ -47,28 +47,22 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 function ProductsSearchScreen({ navigation }) {
   const [state, setState] = useState('')
   const [isloading, setLoading] = useState(true)
-
-  const [search, setSearch] = useState('')
-
-
-  function updateSearch(value) {
-   setSearch(value)
-}
-
-  useEffect(() => {
-    API.get('products', {
-      search: search,
-      per_page: PRODUCTD_DISPLAY_LIMIT
-    })
-      .then(data => {
-        setState(data)
+  const [search, setSearch] = useState('nik')
+ 
+    useEffect(() => {
+      API.get('products', {
+        search: search,
+        per_page:PRODUCTD_DISPLAY_LIMIT
       })
-      .catch(error => {
-        console.log(error);
-      })
-      .finally(() => setLoading(false));
+        .then(data => {
+          setState(data)
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => setLoading(false));
 
-  }, [search])
+    }, [])
 
 
 
@@ -83,13 +77,9 @@ function ProductsSearchScreen({ navigation }) {
     />
   );
 
-
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBar
-        value={search}
-        updateSearch={updateSearch}
-      />
+<SearchBar/>
 
       {isloading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}><ActivityIndicator size="large" color="#f77918" /></View> : (
         <FlatList

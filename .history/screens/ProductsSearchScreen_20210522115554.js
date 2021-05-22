@@ -9,7 +9,7 @@ import SearchBar from '../components/SearchBar/SearchBar';
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
-const PRODUCTD_DISPLAY_LIMIT = 20;
+const PRODUCTD_DISPLAY_LIMIT = 2;
 const DEVIS = "CFA";
 const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
@@ -52,10 +52,7 @@ function ProductsSearchScreen({ navigation }) {
 
 
   function updateSearch(value) {
-   setSearch(value)
-}
-
-  useEffect(() => {
+ useEffect(() => {
     API.get('products', {
       search: search,
       per_page: PRODUCTD_DISPLAY_LIMIT
@@ -68,7 +65,10 @@ function ProductsSearchScreen({ navigation }) {
       })
       .finally(() => setLoading(false));
 
-  }, [search])
+  }, [])
+  }
+
+ 
 
 
 

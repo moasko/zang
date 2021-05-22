@@ -95,13 +95,12 @@ const styles = StyleSheet.create({
     {
         backgroundColor: 'white',
         width: '90%',
-        height: 40,
+      
         flexDirection: 'row'
 
     },
     container: {
-        marginTop:10,
-        height: 50,
+        height: 80,
         alignItems: 'center',
         // height: '100%', width: '100%' 
     },

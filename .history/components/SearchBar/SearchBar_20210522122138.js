@@ -27,19 +27,19 @@ function SearchBar({ value, updateSearch, style }) {
 
                 <TextInput
                     value={query}
-                    placeholder="Rechercher un produit ..."
+                    placeholder="Rechercher un produit"
                     style={styles.textInput}
                     onChangeText={(text) => {
                         var letters = /^$|^[a-zA-Z._\b ]+$/;
                         if (text.length > 12)
-                            setError("Requête trop longue.")
+                            setError("Query too long.")
                         else if (text.match(letters)) {
                             setQuery(text)
                             updateSearch(text)
                             if (error)
                                 setError(false)
                         }
-                        else setError("Veuillez n'entrer que des alphabets")
+                        else setError("Please only enter alphabets")
                     }}
                 />
                 {
@@ -100,8 +100,7 @@ const styles = StyleSheet.create({
 
     },
     container: {
-        marginTop:10,
-        height: 50,
+        height: 80,
         alignItems: 'center',
         // height: '100%', width: '100%' 
     },
