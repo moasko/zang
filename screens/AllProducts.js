@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {RefreshControl, TouchableOpacity, ActivityIndicator, Text, View, FlatList, SafeAreaView } from 'react-native';
+import { RefreshControl, TouchableOpacity, ActivityIndicator, Text, View, FlatList, SafeAreaView } from 'react-native';
 import API from '../components/config'
 import PARAMS from '../config/contes';
 import Item from '../components/ProductCard/ProductCard'
@@ -7,23 +7,23 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const Pagination = () => {
-    
+
     return (
-     <View style={{width:40,height:40,backgroundColor:"red"}}>
-         <Text>{'>'}</Text>
-     </View>
+        <View style={{ width: 40, height: 40, backgroundColor: "red" }}>
+            <Text>{'>'}</Text>
+        </View>
     )
 }
 
 
-function AllProducts({ navigation}) {
+function AllProducts({ navigation }) {
     const [state, setState] = useState('')
     const [isloading, setLoading] = useState(true)
-   const [page,setPage]=useState(10)
-   const navig = useNavigation()
+    const [page, setPage] = useState(10)
+    const navig = useNavigation()
     useEffect(() => {
         API.get('products', {
-            page:page
+            page: page
         })
             .then(data => {
                 setState(data)
@@ -62,9 +62,9 @@ function AllProducts({ navigation}) {
                     horizontal={false}
                     numColumns={2}
                     refreshing={true}
-                    refreshControl={<RefreshControl/>}
-                    ListFooterComponent={<TouchableOpacity onPress={()=>{setPage(page+1); console.log(page),navig.navigate('allProducts')}}>
-                        <Pagination/>
+                    refreshControl={<RefreshControl />}
+                    ListFooterComponent={<TouchableOpacity onPress={() => { setPage(page + 1); console.log(page), navig.navigate('allProducts') }}>
+                        <Pagination />
                     </TouchableOpacity>}
                 />)}
 

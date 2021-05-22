@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator,View, FlatList,SafeAreaView } from 'react-native';
+import { ActivityIndicator, View, FlatList, SafeAreaView } from 'react-native';
 
 import Cate from '../components/elements/Categoris'
 import API from '../components/config'
@@ -47,20 +47,20 @@ function HomeScreen({ navigation }) {
   );
 
   return (
-    <SafeAreaView style={{flex:1}}>
-      {isLoading ?<View style={{flex:1,justifyContent:"center",alignItems:"center"}}><ActivityIndicator size="large" color="#f77918" /></View>  : (
+    <SafeAreaView style={{ flex: 1 }}>
+      {isLoading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}><ActivityIndicator size="large" color="#f77918" /></View> : (
         <FlatList
-        ItemSeparatorComponent={
-          Platform.OS !== 'android' &&
-          (({ highlighted }) => (
-            <View
-              style={[
-                style.separator,
-                highlighted && { marginLeft: 0 }
-              ]}
-            />
-          ))
-        }
+          ItemSeparatorComponent={
+            Platform.OS !== 'android' &&
+            (({ highlighted }) => (
+              <View
+                style={[
+                  style.separator,
+                  highlighted && { marginLeft: 0 }
+                ]}
+              />
+            ))
+          }
           ListHeaderComponent={<Cate></Cate>}
           data={state}
           renderItem={renderItem}
@@ -69,8 +69,8 @@ function HomeScreen({ navigation }) {
           numColumns={(PARAMS.SCREEN_WIDTH >= 600) ? 3 : 2}
           refreshing={true}
           removeClippedSubviews
-         initialNumToRender={2} 
-         maxToRenderPerBatch={1}
+          initialNumToRender={2}
+          maxToRenderPerBatch={1}
         />
       )}
     </SafeAreaView>

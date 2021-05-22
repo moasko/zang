@@ -1,5 +1,5 @@
-import { LogBox,Image,Text,View} from 'react-native';
-import React,{useState,useContext} from 'react';
+import { LogBox, Image, Text, View } from 'react-native';
+import React, { useState, useContext } from 'react';
 import Tabs from './components/Tabs'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,14 +14,14 @@ const Stack = createStackNavigator();
 
 function LogoTitle() {
   return (
-<View style={{flex:1,flexDirection:"row",alignItems:"center"}}>
-    <Image
-      style={{ width: 30, height: 30}}
-      source={require('./assets/logoSmple.png')}
-    />
-    <Text style={{color:"#000",fontSize:15,marginLeft:6,fontWeight:"bold"}}>Zangochap</Text>
-</View>
-  
+    <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+      <Image
+        style={{ width: 30, height: 30 }}
+        source={require('./assets/logoSmple.png')}
+      />
+      <Text style={{ color: "#000", fontSize: 15, marginLeft: 6, fontWeight: "bold" }}>Zangochap</Text>
+    </View>
+
   );
 }
 
@@ -44,8 +44,8 @@ const MyStack = () => {
         }} />
 
         <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ title: "liste des categories" }} />
-        <Stack.Screen name="order" component={OrderScreen} options={{title:"Panier"}}/>
-        <Stack.Screen name="allProducts" component={AllProducts} options={{title:"Tout les produits"}}/>
+        <Stack.Screen name="order" component={OrderScreen} options={{ title: "Panier" }} />
+        <Stack.Screen name="allProducts" component={AllProducts} options={{ title: "Tout les produits" }} />
       </Stack.Navigator>
     </NavigationContainer>
 
@@ -55,6 +55,6 @@ const MyStack = () => {
 export default function App() {
 
   return (
-          <MyStack></MyStack>
+    <MyStack></MyStack>
   );
 }
