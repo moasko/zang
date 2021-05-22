@@ -7,7 +7,7 @@ import API from '../components/config'
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
-const PRODUCTD_DISPLAY_LIMIT = 2;
+const PRODUCTD_DISPLAY_LIMIT = 40;
 const DEVIS = "CFA";
 const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
@@ -49,8 +49,7 @@ function ProductsSearchScreen({ navigation }) {
  
     useEffect(() => {
       API.get('products', {
-        search: search,
-        per_page:PRODUCTD_DISPLAY_LIMIT
+        search: search
       })
         .then(data => {
           setState(data)

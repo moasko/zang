@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Image, Pressable } from 'react-native';
+import {SearchBar} from 'react-native-elements';
 import API from '../components/config'
 
 
@@ -7,7 +8,7 @@ import API from '../components/config'
 //declaration des variables 
 let SCREEN_WIDTH = Dimensions.get('window').width
 const BORDER_WIDTH = 1.5;
-const PRODUCTD_DISPLAY_LIMIT = 2;
+const PRODUCTD_DISPLAY_LIMIT = 40;
 const DEVIS = "CFA";
 const IMG_PLACEHOLDER = "https://zangochap.ci/wp-content/uploads/woocommerce-placeholder.png";
 
@@ -45,12 +46,11 @@ const Item = ({ id, url, name, prix, categories, nav, description }) => (
 function ProductsSearchScreen({ navigation }) {
   const [state, setState] = useState('')
   const [isloading, setLoading] = useState(true)
-  const [search, setSearch] = useState('nik')
+  const [search, setSearch] = useState()
  
     useEffect(() => {
       API.get('products', {
-        search: search,
-        per_page:PRODUCTD_DISPLAY_LIMIT
+        search: search
       })
         .then(data => {
           setState(data)
@@ -78,7 +78,10 @@ function ProductsSearchScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
 
-
+<SearchBar 
+value={search}
+onChangeText={setSearch}
+/>
       {isloading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}><ActivityIndicator size="large" color="#f77918" /></View> : (
         <FlatList
           data={state}
