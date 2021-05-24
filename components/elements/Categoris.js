@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView } from 'react-native';
+import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView,ActivityIndicator } from 'react-native';
 import API from '../config'
 import PARAMS from '../../config/contes';
-
-
-
 
 function ViewAll(){
   const navigation1 = useNavigation();
@@ -15,7 +12,6 @@ function ViewAll(){
      <Pressable onPress={()=>navigation1.navigate('allProducts')}><Text style={{color:"#fff"}}>{"Voir Tout >>"}</Text></Pressable> 
     </View>
   )
-  
 }
 const CateItem = ({ id, title, img }) => {
   const navigation = useNavigation();
@@ -38,7 +34,7 @@ const CateItem = ({ id, title, img }) => {
 
 const Cates = () => {
   const [state, setState] = useState('');
-
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     API.get('products/categories')
       .then(data => {
@@ -47,6 +43,7 @@ const Cates = () => {
       .catch(e => {
         console.log(e)
       })
+      .finally(() => setLoading(false))
   }, [])
   const CatrenderItem = ({ item }) => (
     <CateItem
@@ -58,13 +55,19 @@ const Cates = () => {
 
   return (
     <SafeAreaView>
+       {isLoading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center",height:150 }}>
+         <ActivityIndicator size="large" color="#f77918" />
+         </View>
+         :(
       <FlatList
         data={state}
         renderItem={CatrenderItem}
         keyExtractor={item => item.id.toString()}
         horizontal={true}
       />
+       )}
       <ViewAll/>
+      
     </SafeAreaView>
 
 
