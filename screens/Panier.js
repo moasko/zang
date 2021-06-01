@@ -1,8 +1,10 @@
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
-import firstLog from './firstLogScreen';
+import { Text, View, Button, Platform, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
+
 
 
 
@@ -14,9 +16,19 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default function Panier() {
-  const [expoPushToken, setExpoPushToken] = useState('ExponentPushToken[U6jzUPFaLIeVk8xyq1oXq4]');
+
+
+export default function Panier({ val }) {
+  const navigation = useNavigation();
+  const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
+
+  let [loged, setLoged] = useState({
+    logged: false,
+    name: null,
+    notifiToken: null
+  })
+
   const notificationListener = useRef();
   const responseListener = useRef();
 
@@ -37,9 +49,44 @@ export default function Panier() {
     };
   }, []);
 
+
+  const remember = async () => {
+      try {
+      await SecureStore.setItemAsync(
+        'userinf',
+        JSON.stringify({
+          logged: true,
+          name: val,
+          notifiToken: expoPushToken
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  schedulePushNotification();
+        await remember()
+        getValueFor('userinf')
+        .then(e=>{
+          console.log(e)
+        })
+      
+
+
+  async function getValueFor(key) {
+ 
+    let result = await SecureStore.getItemAsync(key);
+    if (result) {
+      return result
+    } else {
+      alert('No values stored under that key.');
+    }
+  }
+
   return (
     <View>
-      <firstLog />
+    
+      
     </View>
   );
 }
