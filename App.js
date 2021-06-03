@@ -3,7 +3,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import Tabs from './components/Tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as SecureStore from 'expo-secure-store';
 import SingleProduct from './screens/SingleProduct';
 import ByCategoriesScreen from './screens/ByCategoriesScreen';
 import OrderScreen from './screens/orderScreen';
@@ -11,7 +10,6 @@ import AllProducts from './screens/AllProducts';
 import LogoTitle from './components/elements/Logo';
 LogBox.ignoreLogs(['Remote debugger']);
 const Stack = createStackNavigator();
-
 
 const MyStack = () => {
   return  (<NavigationContainer>

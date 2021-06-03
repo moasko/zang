@@ -11,7 +11,11 @@ function ByCategoriesScreen({ navigation, route }) {
   const { id } = route.params
 
   useEffect(() => {
-    API.get('products', {
+    let fermer = false;
+    const sync = async()=>{
+      try{
+        if(!fermer){
+              API.get('products', {
       category: id.toString()
     })
       .then(data => {
@@ -21,6 +25,19 @@ function ByCategoriesScreen({ navigation, route }) {
         console.log(error);
       })
       .finally(()=>setLoading(false));
+        }
+      }catch(e){
+        if(!fermer){
+          throw e
+        }
+      }
+    }
+    sync();
+
+    return ()=>{
+      fermer = true;
+    }
+
   }, [])
 
 

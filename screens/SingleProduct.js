@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, ScrollView, Image, Dimensions, Text, StyleSheet, Pressable,Linking } from 'react-native'
+import { View, ScrollView, Image, Dimensions, Text, StyleSheet, Pressable, Linking } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HTML from 'react-native-render-html'
 import API from '../components/config'
@@ -11,11 +11,10 @@ function SingleProduct({ route }) {
    const navigation = useNavigation();
    const [state, setState] = useState('');
 
-   let { id, name, prix, categories, img, description,permalink } = route.params
+   let { id, name, prix, categories, img, description, permalink } = route.params
    useEffect(() => {
       const abortController = new AbortController();
       const signal = abortController.signal;
-      
       API.get(`products/${id}`)
          .then(data => {
             setState(data)
@@ -41,14 +40,14 @@ function SingleProduct({ route }) {
                <Text style={{ color: "#e76300", fontSize: 35, fontWeight: "600" }}>{prix} CFR</Text>
                <Text style={{ color: "gray", fontSize: 20, fontWeight: "600" }}>{categories}</Text>
                <Text style={{ color: "#000", fontSize: 35, fontWeight: "600" }}>{name}</Text>
-               {(state.id == "") ? <Text>"Loading..."</Text>:<Text>{state.id}</Text>}
-              
-               <HTML   source={{ html: `${description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH}/>
+               {(state.id == "") ? <Text>"Loading..."</Text> : <Text>{state.id}</Text>}
+
+               <HTML source={{ html: `${description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} />
             </View>
          </ScrollView>
 
          <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <AddToCartBtn id={id.toString()} permalink={permalink} prix={prix} name={name} img={img}/>
+            <AddToCartBtn id={id.toString()} permalink={permalink} prix={prix} name={name} img={img} />
             <Pressable onPress={() => navigation.navigate('order', { id: id })}>
                <View style={{
                   width: (PARAMS.SCREEN_WIDTH / 2),
@@ -59,14 +58,14 @@ function SingleProduct({ route }) {
             </Pressable>
          </View>
          <Pressable onPress={() => Linking.openURL(`tel:+2250584472464`)}>
-               <View style={{
-                  width: (PARAMS.SCREEN_WIDTH),
-                  borderWidth:2,
-                  borderColor:"orange"
-               }}>
-                  <Text style={styles.callBtn}><MaterialCommunityIcons name="phone" color={"orange"} size={20} /> +225 05 84 47 24 64</Text>
-               </View>
-            </Pressable>
+            <View style={{
+               width: (PARAMS.SCREEN_WIDTH),
+               borderWidth: 2,
+               borderColor: "orange"
+            }}>
+               <Text style={styles.callBtn}><MaterialCommunityIcons name="phone" color={"orange"} size={20} /> +225 05 84 47 24 64</Text>
+            </View>
+         </Pressable>
       </View>
    )
 
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
       textAlign: "center",
       padding: 9
    },
-   callBtn:{
+   callBtn: {
       fontSize: 15,
       fontWeight: "bold",
       color: 'orange',

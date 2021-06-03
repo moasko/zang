@@ -4,10 +4,9 @@ import { ActivityIndicator, View, FlatList, SafeAreaView } from 'react-native';
 import Cate from '../components/elements/Categoris'
 import API from '../components/config'
 import PARAMS from '../config/contes';
-
 //product card
 import Item from '../components/ProductCard/ProductCard'
-
+import Modale from '../components/elements/Modale'
 //declaration des variables 
 
 
@@ -16,22 +15,37 @@ import Item from '../components/ProductCard/ProductCard'
 function HomeScreen({ navigation }) {
   const [state, setState] = useState('');
   const [isLoading, setLoading] = useState(true);
-   const [limite,setLimite]=useState(20)
-
-  
+  const [limite, setLimite] = useState(20)
 
   useEffect(() => {
-    API.get('products', {
-      per_page: limite
-    })
-      .then(data => {
-        setState(data)
-      })
-      .catch(error => {
-        console.log(error);
-      })
-      .finally(() => setLoading(false))
-  }, [])
+    let fermer = false
+    const asyn = async () => {
+      try {
+        if (!fermer) {
+          API.get('products', {
+            per_page: limite
+          })
+            .then(data => {
+              setState(data)
+            })
+            .catch(error => {
+              console.log(error);
+            })
+            .finally(() => setLoading(false))
+        }
+      } catch (e) {
+        if (!fermer) {
+          throw e
+        }
+      }
+    }
+
+    asyn();
+    return () => {
+      fermer = true;
+    }
+
+  }, [state])
 
 
   const renderItem = ({ item }) => (
@@ -80,6 +94,7 @@ function HomeScreen({ navigation }) {
           }}
         />
       )}
+      <Modale />
     </SafeAreaView>
   )
 }

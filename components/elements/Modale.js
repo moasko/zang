@@ -11,17 +11,7 @@ async function getValueFor(key) {
     }
 }
 
-function gett() {
-    try {
-        let c = getValueFor('userinf').then(e => {
-            return e
-        })
-        return c
-    } catch (err) {
-        console.log(err)
-    }
 
-}
 
 const Modale = () => {
     const [modalVisible, setModalVisible] = useState(true);
@@ -50,7 +40,7 @@ const Modale = () => {
                     />
                     <TouchableOpacity onPress={async () => {
                         setModalVisible(!modalVisible)
-                        console.log(gett())
+                        console.log(number)
                     }} style={{ width: "100%", alignItems: "center" }}>
                         <View style={{ width: "90%", backgroundColor: "#fff", padding: 18, borderRadius: 5, marginTop: 35 }}>
                             <Text style={{ color: "#ff6200", fontSize: 18, textAlign: "center" }}>RECEVOIR MON CADEAU</Text>
