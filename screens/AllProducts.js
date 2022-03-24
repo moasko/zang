@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { RefreshControl, TouchableOpacity, ActivityIndicator, Text, View, FlatList, SafeAreaView } from 'react-native';
 import API from '../components/config'
 import PARAMS from '../config/contes';
 import Item from '../components/ProductCard/ProductCard'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProducts } from '../utils/backend/products';
+import BigList from "react-native-big-list";
+
 
 
 const Pagination = () => {
@@ -17,22 +21,36 @@ const Pagination = () => {
 
 
 function AllProducts({ navigation }) {
-    const [state, setState] = useState('')
-    const [isloading, setLoading] = useState(true)
-    const [page, setPage] = useState(10)
-    const navig = useNavigation()
+
+    const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [limite, setLimite] = useState(100)
+    const [page, setPage] = useState(1)
+
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.products.products)
+
+    let vue = useRef(true);
     useEffect(() => {
-        API.get('products', {
-            page: page
-        })
-            .then(data => {
-                setState(data)
+        vue.current = true;
+        setLoading(true)
+        getAllProducts(page, limite)
+            .then(res => {
+                if (vue) {
+                    dispatch(setProducts(res))
+                }
             })
-            .catch(error => {
-                console.log(error);
+            .catch(err => {
+                setError(err)
             })
-            .finally(() => setLoading(false));
-    }, [])
+            .finally(() => {
+                setLoading(false)
+            })
+
+        return () => {
+            vue.current = false;
+        }
+    }, [products === null, limite])
 
 
 
@@ -54,18 +72,19 @@ function AllProducts({ navigation }) {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            {isloading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}><ActivityIndicator size="large" color="#f77918" /></View> : (
-                <FlatList
-                    data={state}
+            {isLoading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}><ActivityIndicator size="large" color="#f77918" /></View> : (
+                <BigList
+                    data={products}
                     renderItem={renderItem}
                     keyExtractor={item => item.id.toString()}
                     horizontal={false}
                     numColumns={2}
                     refreshing={true}
                     refreshControl={<RefreshControl />}
-                    ListFooterComponent={<TouchableOpacity onPress={() => { setPage(page + 1); console.log(page), navig.navigate('allProducts') }}>
-                        <Pagination />
-                    </TouchableOpacity>}
+                    onEndReached={({ distanceFromEnd }) => {
+                        setPage(page + 1)
+                    }
+                    }
                 />)}
 
         </SafeAreaView>

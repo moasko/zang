@@ -10,6 +10,7 @@ const Style = {
     flexWrap: "wrap",
     margin: 5,
     width: (PARAMS.SCREEN_WIDTH / 2),
+    height:300,
     borderColor: "#f77918",
     borderEndWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
     borderLeftWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,

@@ -11,6 +11,11 @@ import LogoTitle from './components/elements/Logo';
 LogBox.ignoreLogs(['Remote debugger']);
 const Stack = createStackNavigator();
 
+//redux
+import Store from './redux';
+import { Provider } from 'react-redux';
+
+
 const MyStack = () => {
   return  (<NavigationContainer>
         <Stack.Navigator initialRouteName={"home"} screenOptions={{
@@ -40,6 +45,8 @@ const MyStack = () => {
 
 export default function App() {
   return (
+    <Provider store={Store}>
     <MyStack></MyStack>
+    </Provider>
   );
 }
