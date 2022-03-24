@@ -47,10 +47,6 @@ let vue = useRef(true);
     }
   }, [products === null,limite])
 
-const handleReflesh = () => {
-  setLoading(true)
-}
-
 
 
   const renderItem = ({ item }) => {
