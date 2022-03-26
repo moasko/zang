@@ -11,6 +11,7 @@ import LogoTitle from './components/elements/Logo';
 LogBox.ignoreLogs(['Remote debugger']);
 const Stack = createStackNavigator();
 
+
 //redux
 import Store from './redux';
 import { Provider } from 'react-redux';

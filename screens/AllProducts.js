@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { RefreshControl, TouchableOpacity, ActivityIndicator, Text, View, FlatList, SafeAreaView } from 'react-native';
+import { RefreshControl, TouchableOpacity, ActivityIndicator, Text, View, FlatList, SafeAreaView,VirtualizedList } from 'react-native';
 import API from '../components/config'
 import PARAMS from '../config/contes';
 import Item from '../components/ProductCard/ProductCard'

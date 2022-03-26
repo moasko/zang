@@ -6,23 +6,32 @@ import HTML from 'react-native-render-html'
 import API from '../components/config'
 import AddToCartBtn from '../components/elements/AddToCartBtn';
 import PARAMS from '../config/contes';
+import {useSelector} from 'react-redux'
+
 
 function SingleProduct({ route }) {
    const navigation = useNavigation();
    const [state, setState] = useState('');
 
-   let { id, name, prix, categories, img, description, permalink } = route.params
-   useEffect(() => {
-      const abortController = new AbortController();
-      const signal = abortController.signal;
-      API.get(`products/${id}`)
-         .then(data => {
-            setState(data)
-         })
-         .catch(e => {
-            throw e
-         })
-   }, [])
+   const product = useSelector(state => state.products.products.find(item => item.id === route.params.id))
+
+   const {
+      name,
+      short_description,
+      images,
+      price,
+      regular_price,
+      sale_price,
+      categories,
+      permalink,
+      attributes,
+      variations,
+      id
+   } = product
+
+   const principalImage = images[0].src
+   const categorie = categories[0].name
+
    return (
       <View style={{ flex: 1 }}>
          <ScrollView>
@@ -32,22 +41,23 @@ function SingleProduct({ route }) {
                   height: 400
                }}
                source={{
-                  uri: img
+                  uri: principalImage
                }}
 
             />
             <View style={{ padding: 12 }}>
-               <Text style={{ color: "#e76300", fontSize: 35, fontWeight: "600" }}>{prix} CFR</Text>
-               <Text style={{ color: "gray", fontSize: 20, fontWeight: "600" }}>{categories}</Text>
+               <Text style={{ color: "#e76300", fontSize: 35, fontWeight: "600" }}>{price} CFR</Text>
+               <Text style={{ color: "gray", fontSize: 20, fontWeight: "600" }}>{categorie}</Text>
                <Text style={{ color: "#000", fontSize: 35, fontWeight: "600" }}>{name}</Text>
                {(state.id == "") ? <Text>"Loading..."</Text> : <Text>{state.id}</Text>}
+               <Text style={{ color: "#000", fontSize: 20, fontWeight: "600" }}>{product.id}</Text>
 
-               <HTML source={{ html: `${description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} />
+               <HTML source={{ html: `${short_description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} />
             </View>
          </ScrollView>
 
          <View style={{ flexDirection: "row", justifyContent: "center" }}>
-            <AddToCartBtn id={id.toString()} permalink={permalink} prix={prix} name={name} img={img} />
+            <AddToCartBtn id={id.toString()} permalink={permalink} prix={price} name={name} img={principalImage} />
             <Pressable onPress={() => navigation.navigate('order', { id: id })}>
                <View style={{
                   width: (PARAMS.SCREEN_WIDTH / 2),
@@ -57,7 +67,7 @@ function SingleProduct({ route }) {
                </View>
             </Pressable>
          </View>
-         <Pressable onPress={() => Linking.openURL(`tel:+2250584472464`)}>
+         <Pressable onPress={() => Linking.openURL(`tel:+2250574641453`)}>
             <View style={{
                width: (PARAMS.SCREEN_WIDTH),
                borderWidth: 2,

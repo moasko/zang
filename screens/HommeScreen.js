@@ -94,6 +94,7 @@ let vue = useRef(true);
              initialNumToRender={2}
              maxToRenderPerBatch={1}
              onEndReachedThreshold={1}
+             scrollEventThrottle={400}
              onEndReached={({ distanceFromEnd }) => {
      console.log("limite",limite)
              }}
