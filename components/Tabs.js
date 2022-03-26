@@ -9,6 +9,8 @@ import ProductsSearchScreen from '../screens/ProductsSearchScreen';
 import ContactUsScreen from '../screens/ontactUsScreen';
 import PromoScreeen from '../screens/PromoScreeen';
 import Panier from '../screens/Panier';
+import { useSelector } from 'react-redux';
+
 
 
 //variables declaration
@@ -16,6 +18,9 @@ const Tab = createBottomTabNavigator();
 
 
 function Tabs() {
+const cart = useSelector(state => state.cart.cart);
+
+
   return (
     <SafeAreaProvider>
       <Tab.Navigator>
@@ -40,6 +45,7 @@ function Tabs() {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="basket" color={color} size={size} />
             ),
+            tabBarBadge: cart.length,
           }} />
 
         <Tab.Screen

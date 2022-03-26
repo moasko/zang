@@ -20,12 +20,8 @@ function SingleProduct({ route }) {
       short_description,
       images,
       price,
-      regular_price,
-      sale_price,
       categories,
       permalink,
-      attributes,
-      variations,
       id
    } = product
 

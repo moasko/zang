@@ -1,4 +1,4 @@
-import { GET_PRODUCTS,SET_PRODUCTS } from "../constants";
+import { GET_PRODUCTS,SET_PRODUCTS,ADD_TO_CART } from "../constants";
 
 
 export const getProducts = (products) => {
@@ -15,3 +15,16 @@ export const setProducts = (products) => {
         payload: products
     }
 }
+
+/**
+ * 
+ * @param {Object} product 
+ * @returns 
+ */
+export const addToCart = (product) => {
+    return {
+        type: ADD_TO_CART,
+        payload: product
+    }
+}
+

@@ -4,13 +4,13 @@ import PARAMS from '../../config/contes';
 const Style = {
   container: {
     flex: 1,
+    padding: 12,
   },
   item: {
-    flex: 1,
+    margin: 6,
+    flexDirection: 'row',
     flexWrap: "wrap",
-    margin: 5,
-    width: (PARAMS.SCREEN_WIDTH / 2),
-    height:300,
+    width: (PARAMS.SCREEN_WIDTH / 2 - 12),
     borderColor: "#f77918",
     borderEndWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
     borderLeftWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
@@ -39,7 +39,17 @@ const Style = {
     padding:5,
     backgroundColor: "#fdcdcd",
     borderRadius:3
-  }
+  },
+  addToCartBtn: {
+    flex: 1,
+    padding: 8,
+    width: (PARAMS.SCREEN_WIDTH / 2 - 15),
+    backgroundColor: "orange",
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }
 
 
