@@ -4,7 +4,6 @@ import Style from './CardStyle'
 import PARAMS from '../../config/contes';
 //redux
 import { useDispatch, useSelector } from 'react-redux';
-
 import { addToCart } from "../../redux/actions/products";
 
 
@@ -15,16 +14,12 @@ function showToast(message) {
 
 
 
-
 const Item = ({ id, url, name, prix, preprix, categories, nav, description, permalink }) => {
 
   const dispatch = useDispatch();
-  const panier = useSelector(state => state.cart.cart);
-
 
   function addToPorductsCart() {
-    const productParamas = { id, url, name, prix, preprix, categories, permalink }
-    console.log(panier);
+    const productParamas = { id, url, name, prix, preprix, categories, permalink, qt: 1 }
     dispatch(addToCart(productParamas));
     showToast('Produit ajouté au panier');
   }
@@ -33,10 +28,10 @@ const Item = ({ id, url, name, prix, preprix, categories, nav, description, perm
   return (
     <Pressable
       style={Style.item}
-      onPress={() => nav.navigate('SingleProduct', { id: id, img: url, name: name, prix: prix, categories: categories, description: description, permalink: permalink })} >
+      onPress={() => nav.navigate('SingleProduct', { product_id: id})} >
       <Image style={Style.productImage} source={{ uri: url }} />
       <View style={Style.badg}>
-        <Text style={{ color: "#ff0000" }}>-{(preprix - prix) / 100}%</Text>
+        <Text style={{ color: "#ff0000" }}>-{Math.round((prix * 100) / preprix)}%</Text>
       </View>
       <View style={Style.title}>
         <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>

@@ -1,8 +1,16 @@
+//products
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const SET_PRODUCTS_BY_CATEGORIE = 'SET_PRODUCTS_BY_CATEGORIE';
 
+
+//cart
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-export const SET_CART = 'SET_CART';
+export const RESETE_CART = 'RESETE_CART';
 export const SET_CART_ITEM_QUANTITY = 'SET_CART_ITEM_QUANTITY';
+export const UPDATE_CART_ITEM_QUANTITY = 'UPDATE_CART_ITEM_QUANTITY';
 
+//category
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const SET_CATEGORIES = 'SET_CATEGORIES';

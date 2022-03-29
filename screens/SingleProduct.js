@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, ScrollView, Image, Dimensions, Text, StyleSheet, Pressable, Linking } from 'react-native'
+import { View, ScrollView, Image, Text, StyleSheet, Pressable, Linking } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HTML from 'react-native-render-html'
-import API from '../components/config'
 import AddToCartBtn from '../components/elements/AddToCartBtn';
 import PARAMS from '../config/contes';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 function SingleProduct({ route }) {
-   const navigation = useNavigation();
-   const [state, setState] = useState('');
 
-   const product = useSelector(state => state.products.products.find(item => item.id === route.params.id))
+   const { product_id } = route.params;
+   const navigation = useNavigation();
+
+   const product = useSelector(state => state.products.products.find(item => item.id === product_id));
+
+   console.log(product);
 
    const {
       name,
@@ -23,7 +25,7 @@ function SingleProduct({ route }) {
       categories,
       permalink,
       id
-   } = product
+   } = product;
 
    const principalImage = images[0].src
    const categorie = categories[0].name
@@ -45,9 +47,7 @@ function SingleProduct({ route }) {
                <Text style={{ color: "#e76300", fontSize: 35, fontWeight: "600" }}>{price} CFR</Text>
                <Text style={{ color: "gray", fontSize: 20, fontWeight: "600" }}>{categorie}</Text>
                <Text style={{ color: "#000", fontSize: 35, fontWeight: "600" }}>{name}</Text>
-               {(state.id == "") ? <Text>"Loading..."</Text> : <Text>{state.id}</Text>}
                <Text style={{ color: "#000", fontSize: 20, fontWeight: "600" }}>{product.id}</Text>
-
                <HTML source={{ html: `${short_description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} />
             </View>
          </ScrollView>

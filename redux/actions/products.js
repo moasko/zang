@@ -1,4 +1,14 @@
-import { GET_PRODUCTS,SET_PRODUCTS,ADD_TO_CART } from "../constants";
+import {
+    GET_PRODUCTS,
+    SET_PRODUCTS,
+    ADD_TO_CART,
+    REMOVE_FROM_CART,
+    SET_CART_ITEM_QUANTITY,
+    RESETE_CART,
+    SET_CATEGORIES,
+    GET_PRODUCTS_BY_CATEGORIE,
+    SET_PRODUCTS_BY_CATEGORIE
+} from "../constants";
 
 
 export const getProducts = (products) => {
@@ -16,11 +26,6 @@ export const setProducts = (products) => {
     }
 }
 
-/**
- * 
- * @param {Object} product 
- * @returns 
- */
 export const addToCart = (product) => {
     return {
         type: ADD_TO_CART,
@@ -28,3 +33,47 @@ export const addToCart = (product) => {
     }
 }
 
+
+export const deleteToCart = (product) => {
+    return {
+        type: REMOVE_FROM_CART,
+        payload: product
+    }
+}
+
+export const setCartItemQuantity = (product) => {
+    return {
+        type: SET_CART_ITEM_QUANTITY,
+        payload: product
+    }
+}
+
+
+export const resetCart = () => {
+    return {
+        type: RESETE_CART
+    }
+}
+
+
+export const setCategories = (categories) => {
+    return {
+        type: SET_CATEGORIES,
+        payload: categories
+    }
+}
+
+
+
+export const getPorductsByCategorie =()=>{
+    return {
+        type:GET_PRODUCTS_BY_CATEGORIE
+    }
+}
+
+export const setProductsByCategorie =(products)=>{
+    return {
+        type:SET_PRODUCTS_BY_CATEGORIE,
+        payload:products
+    }
+}

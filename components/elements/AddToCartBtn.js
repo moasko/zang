@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Pressable, Text, StyleSheet, Linking } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PARAMS from '../../config/contes'
 
-const AddToCartBtn = ({ id, permalink,prix,name,img}) => {
+const AddToCartBtn = ({ id, permalink, prix, name, img }) => {
 
     const initiateWhatsAppSMS = () => {
         const PhoneNumber = "+2250584472464"
@@ -20,7 +20,7 @@ const AddToCartBtn = ({ id, permalink,prix,name,img}) => {
                 console.log('WhatsApp Opened');
             })
             .catch(() => {
-                alert('Assurez-vous que Whatsapp est installé sur votre appareil'); 
+                alert('Assurez-vous que Whatsapp est installé sur votre appareil');
             });
     };
     return (

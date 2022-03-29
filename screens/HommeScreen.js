@@ -2,7 +2,6 @@ import React, { useState, useEffect,useRef } from 'react';
 import { ActivityIndicator, View, FlatList, SafeAreaView } from 'react-native';
 
 import Cate from '../components/elements/Categoris'
-import API from '../components/config'
 import PARAMS from '../config/contes';
 //product card
 import Item from '../components/ProductCard/ProductCard'
@@ -16,7 +15,6 @@ import { setProducts } from '../redux/actions/products';
 
 
 function HomeScreen({ navigation }) {
-  const [state, setState] = useState('');
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [limite, setLimite] = useState(20)

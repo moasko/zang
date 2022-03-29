@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView, ActivityIndicator } from 'react-native';
-import API from '../config'
 import PARAMS from '../../config/contes';
 import HeaderImage from './HeaderImage';
+//REDUX
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllCategories } from '../../utils/backend/products';
+import { setCategories } from '../../redux/actions/products';
+
+
 
 function ViewAll() {
   const navigation1 = useNavigation();
   return (
     <View style={styles.alllign}>
       <Text style={{ color: "#fff", fontWeight: "700" }}>PRODUISTS</Text>
-      <Pressable onPress={() => navigation1.navigate('allProducts')}><Text style={{ color: "#fff" }}>{"Voir Tout >>"}</Text></Pressable>
+      <Pressable onPress={() => navigation1.navigate('allProducts')}>
+        <Text style={{ color: "#fff" }}>Voir Tout</Text>
+        </Pressable>
     </View>
   )
 }
@@ -34,19 +41,20 @@ const CateItem = ({ id, title, img }) => {
 };
 
 const Cates = () => {
-  const [state, setState] = useState('');
   const [isLoading, setLoading] = useState(true);
-  useEffect(() => {
+  const dispatch = useDispatch();
 
-    API.get('products/categories')
-      .then(data => {
-        setState(data)
-      })
-      .catch(e => {
-        console.log(e)
-      })
-      .finally(() => setLoading(false))
-  }, [])
+  const categories = useSelector(state => state.categories.categories);
+
+
+  useEffect(() =>{
+    getAllCategories().then(res => {
+      dispatch(setCategories(res));
+      setLoading(false);
+    });
+  },[]);
+
+
   const CatrenderItem = ({ item }) => (
     <CateItem
       id={item.id}
@@ -63,14 +71,13 @@ const Cates = () => {
       </View>
         : (
           <FlatList
-            data={state}
+            data={categories}
             renderItem={CatrenderItem}
             keyExtractor={item => item.id.toString()}
             horizontal={true}
           />
         )}
-      <ViewAll />
-
+<ViewAll />
     </SafeAreaView>
 
 

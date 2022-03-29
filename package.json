@@ -12,6 +12,9 @@
     "expo-crypto": "~10.1.1",
     "expo-notifications": "~0.14.0",
     "expo-secure-store": "~11.1.0",
+    "expo-splash-screen": "~0.14.1",
+    "expo-status-bar": "~1.2.0",
+    "expo-updates": "^0.11.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
@@ -29,9 +32,7 @@
     "react-native-woocommerce-api": "^1.8.8",
     "react-navigation": "^4.4.4",
     "react-redux": "^7.2.6",
-    "redux": "^4.1.2",
-    "expo-splash-screen": "~0.14.1",
-    "expo-status-bar": "~1.2.0"
+    "redux": "^4.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
@@ -42,6 +43,9 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject"
+  },
+  "resolutions": {
+    "uglify-es": "3.2.2"
   },
   "private": true,
   "name": "zang",

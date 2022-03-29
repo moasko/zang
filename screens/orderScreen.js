@@ -3,6 +3,9 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, Dimensions, ActivityIndicator, Pressable,TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import API from '../components/config';
+import { resetCart } from '../redux/actions/products';
+import { useDispatch } from 'react-redux';
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
@@ -79,7 +82,7 @@ function Loaded() {
 }
 
 const OrderScreen = ({ route }) => {
-  let { id } = route.params
+  let {order} = route.params
   const [code, setCode] = useState(null)
   const [nom, setNom] = useState(null)
   const [prenom, setPrenom] = useState(null)
@@ -90,6 +93,8 @@ const OrderScreen = ({ route }) => {
   const [respons, setRespons] = useState('')
   const [isLoading, setLoading] = useState(false);
   const [isLoaded,setLoaded]=useState(false)
+
+  const dispatch = useDispatch()
 
   let data = {
     payment_method: "bacs",
@@ -104,7 +109,7 @@ const OrderScreen = ({ route }) => {
       state: "CI",
       postcode: "",
       country: "CI",
-      email: "moasko@gmail.com",
+      email: "",
       phone: tel1
     },
     shipping: {
@@ -117,12 +122,7 @@ const OrderScreen = ({ route }) => {
       postcode: "",
       country: "CI"
     },
-    line_items: [
-      {
-        product_id: id,
-        quantity: 1
-      }
-    ],
+    line_items: order,
     shipping_lines: [
       {
         method_id: "flat_rate",
@@ -143,6 +143,7 @@ const OrderScreen = ({ route }) => {
       }).finally(() => {
         setLoading(false)
         setLoaded(true)
+        dispatch(resetCart())
       })
   }
 

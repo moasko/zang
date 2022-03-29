@@ -11,7 +11,7 @@ const Style = {
     flexDirection: 'row',
     flexWrap: "wrap",
     width: (PARAMS.SCREEN_WIDTH / 2 - 12),
-    borderColor: "#f77918",
+    borderColor: "orange",
     borderEndWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
     borderLeftWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
     borderBottomWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
