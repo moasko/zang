@@ -1,4 +1,4 @@
-# Zngochap.ci mobile app
+# Zngochap.com mobile app
 
 <p>
   <!-- iOS -->
