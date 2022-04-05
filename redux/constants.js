@@ -2,6 +2,7 @@
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const SET_PRODUCTS_BY_CATEGORIE = 'SET_PRODUCTS_BY_CATEGORIE';
+export const SINGLE_PRODUCT = 'SINGLE_PRODUCT';
 
 
 //cart

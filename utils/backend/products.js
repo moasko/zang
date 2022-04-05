@@ -1,6 +1,6 @@
 import { decode, encode } from 'base-64'
 import axios from "axios";
-import { ALL_PRODUCTS, ALL_CATEGORIES, GET_PRODUCTS_BY_CATEGORIE } from "../api";
+import { ALL_PRODUCTS, ALL_CATEGORIES, GET_PRODUCTS_BY_CATEGORIE, SINGLE_PRODUCT } from "../api";
 
 if (!global.btoa) {
     global.btoa = encode;
@@ -39,6 +39,20 @@ export const getProductsByCategory = (id) => {
             auth: authData, params: {
                 category: id
             }
+        })
+            .then(res => {
+                resolve(res)
+            })
+            .catch(err => {
+                reject(err)
+            })
+    })
+}
+
+export const getSingleProduct = (id) => {
+    return new Promise((resolve, reject) => {
+        axios.get(SINGLE_PRODUCT + id, {
+            auth: authData
         })
             .then(res => {
                 resolve(res)

@@ -79,6 +79,7 @@ function AllProducts({ navigation }) {
                     keyExtractor={item => item.id.toString()}
                     horizontal={false}
                     numColumns={2}
+                    itemHeight={450}
                     refreshing={true}
                     refreshControl={<RefreshControl />}
                     onEndReached={({ distanceFromEnd }) => {

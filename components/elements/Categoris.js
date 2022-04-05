@@ -42,12 +42,14 @@ const CateItem = ({ id, title, img }) => {
 
 const Cates = () => {
   const [isLoading, setLoading] = useState(true);
+
   const dispatch = useDispatch();
 
   const categories = useSelector(state => state.categories.categories);
 
 
   useEffect(() =>{
+    setLoading(true);
     getAllCategories().then(res => {
       dispatch(setCategories(res));
       setLoading(false);

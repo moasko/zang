@@ -1,9 +1,10 @@
-import { GET_PRODUCTS, SET_PRODUCTS,SET_PRODUCTS_BY_CATEGORIE } from "../constants";
+import { GET_PRODUCTS, SET_PRODUCTS,SET_PRODUCTS_BY_CATEGORIE,SINGLE_PRODUCT } from "../constants";
 
 
 const initialState = {
     products: [],
-    productsByCategorie: []
+    productsByCategorie: [],
+    singleProduct: {},
 }
 
 
@@ -20,6 +21,11 @@ const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productsByCategorie: action.payload
+            }
+        case SINGLE_PRODUCT:
+            return {
+                ...state,
+                singleProduct: action.payload
             }
         default:
             return state

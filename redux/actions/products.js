@@ -7,9 +7,9 @@ import {
     RESETE_CART,
     SET_CATEGORIES,
     GET_PRODUCTS_BY_CATEGORIE,
-    SET_PRODUCTS_BY_CATEGORIE
+    SET_PRODUCTS_BY_CATEGORIE,
+    SINGLE_PRODUCT
 } from "../constants";
-
 
 export const getProducts = (products) => {
     return {
@@ -68,6 +68,13 @@ export const setCategories = (categories) => {
 export const getPorductsByCategorie =()=>{
     return {
         type:GET_PRODUCTS_BY_CATEGORIE
+    }
+}
+
+export const setSingleProductAction =(product)=>{
+    return {
+        type:SINGLE_PRODUCT,
+        payload:product
     }
 }
 

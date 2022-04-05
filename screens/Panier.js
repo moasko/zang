@@ -20,9 +20,7 @@ export default function Panier({ route }) {
     })
   }); 
 
-  useEffect(() => {
-    console.log(order);
-    }, [panier])
+
 
   const navigation = useNavigation();
   

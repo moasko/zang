@@ -139,7 +139,6 @@ const OrderScreen = ({ route }) => {
         setRespons(response)
       })
       .catch(error => {
-        console.log(error.response.data);
       }).finally(() => {
         setLoading(false)
         setLoaded(true)
