@@ -2,21 +2,23 @@ import PARAMS from '../../config/contes';
 
 
 const Style = {
+  productInfo: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    padding: 5,
+    width: "100%",
+  },
   container: {
     flex: 1,
     padding: 12,
   },
   item: {
+    backgroundColor: '#fff',
     margin: 6,
     flexDirection: 'row',
     flexWrap: "wrap",
     width: (PARAMS.SCREEN_WIDTH / 2 - 12),
     borderColor: "orange",
-    borderEndWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
-    borderLeftWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
-    borderBottomWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
-    borderTopWidth: PARAMS.PROCUVTS_CARDES_BORDER_WIDTH,
-    borderRadius: 8,
     borderStyle: "dotted",
     position: 'relative'
   },
@@ -24,8 +26,6 @@ const Style = {
     padding: 4,
   },
   productImage: {
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
     width: "100%",
     height: 200,
     zIndex: -1,
@@ -36,19 +36,26 @@ const Style = {
     right: 6,
     justifyContent: 'center',
     alignItems: 'center',
-    padding:5,
+    padding: 5,
     backgroundColor: "#fdcdcd",
-    borderRadius:3
+    borderRadius: 3
   },
   addToCartBtn: {
-    flex: 1,
-    padding: 8,
-    width: (PARAMS.SCREEN_WIDTH / 2 - 15),
-    backgroundColor: "orange",
-    borderBottomLeftRadius: 7,
-    borderBottomRightRadius: 7,
+    borderRadius: 50,
+    width: 40,
+    height: 40,
+    backgroundColor: "#000",
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 4,
+},
+shadowOpacity: 0.32,
+shadowRadius: 5.46,
+
+elevation: 9,
   },
 }
 

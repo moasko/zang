@@ -15,3 +15,10 @@ export const UPDATE_CART_ITEM_QUANTITY = 'UPDATE_CART_ITEM_QUANTITY';
 //category
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
+
+
+//searche
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
+
+
+export const PAGINATION = 'PAGINATION';

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import WooCommerceAPI from 'react-native-woocommerce-api';
 
   const API = new WooCommerceAPI({

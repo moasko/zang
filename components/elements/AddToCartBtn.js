@@ -27,10 +27,14 @@ const AddToCartBtn = ({ id, permalink, prix, name, img }) => {
 
         <Pressable onPress={() => initiateWhatsAppSMS()} >
             <View style={{
-                width: (PARAMS.SCREEN_WIDTH / 2),
-                backgroundColor: '#0ac352'
+             justifyContent: "center",
+             alignItems: "center",
+             width: 50,
+             height: 50,
+             borderRadius: 50,
+            backgroundColor: '#0ac352'
             }}>
-                <Text style={styles.btnText}> <MaterialCommunityIcons name="basket" color={"#fff"} size={20} /> WhatsApp</Text>
+                <Text style={styles.btnText}> <MaterialCommunityIcons name="whatsapp" color={"#fff"} size={20} /></Text>
             </View>
         </Pressable>
 

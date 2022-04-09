@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 50,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
-    padding: 5,
+    padding: 3,
     backgroundColor: '#e84500',
   },
   title: {

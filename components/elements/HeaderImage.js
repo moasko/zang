@@ -19,9 +19,10 @@ const Item = ({ item }) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: 145,
-                    width: SCREEN_WIDTH - 40,
+                    marginRight: 20,
+                    width: SCREEN_WIDTH - 70,
                     marginTop: 10,
-                    borderRadius: 5
+                    borderRadius: 20
                 }}
                 source={{
                     uri: item.img

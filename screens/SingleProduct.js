@@ -1,110 +1,98 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, ScrollView, Image, Text, StyleSheet, Pressable, Linking, ActivityIndicator } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HTML from 'react-native-render-html'
 import AddToCartBtn from '../components/elements/AddToCartBtn';
 import PARAMS from '../config/contes';
-import { useSelector, useDispatch } from 'react-redux'
-import { getSingleProduct } from '../utils/backend/products';
-import { set } from 'react-native-reanimated';
-import { setSingleProductAction } from '../redux/actions/products';
 
 function SingleProduct({ route }) {
 
-   const { product_id } = route.params;
+   const { parametters } = route.params;
+
    const navigation = useNavigation();
    const [singleProduct, setSingleProduct] = useState(null);
    const [isLoading, setLoading] = useState(true);
 
-   const dispatch = useDispatch();
-
-
-   const product = useSelector(state => state.products.products.find(item => item.id === product_id));
-
-
-   const mountedRef = useRef(true)
-   useEffect(() => {
-      setLoading(true)
-      getSingleProduct(product_id)
-         .then(res => {
-            if (mountedRef.current) {
-            dispatch(setSingleProductAction(res.data))
-            setSingleProduct(res.data)
-            }
-         })
-         .catch(err => {
-            console.log(err)
-         })
-         .finally(() => {
-            setLoading(false)
-         })
-
-         return () => {
-            mountedRef.current = false;
-         }
-   }, [])
-
-
-  const singleProductSelect = useSelector(state => state.products.singleProduct)
-
    const {
+      id,
+      url,
       name,
-      short_description,
-      images =images[0].src,
-      price,
-      categories =categories[0].name,
+      prix,
+      preprix,
+      categories,
       permalink,
-      id
-   } = singleProduct;
-
+      description
+   } = parametters;
 
    return (
       <View style={{ flex: 1 }}>
-         {isLoading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}><ActivityIndicator size="large" color="#e76300" /></View> : (
-            <>
-               <ScrollView>
-                  <Image
-                     style={{
-                        width: PARAMS.SCREEN_WIDTH,
-                        height: 400
-                     }}
-                     source={{
-                        uri: principalImage
-                     }}
+         <>
+            <ScrollView>
+               <Image
+                  style={{
+                     width: PARAMS.SCREEN_WIDTH,
+                     height: 400
+                  }}
+                  source={{
+                     uri: url
+                  }}
 
-                  />
-                  <View style={{ padding: 12 }}>
-                     <Text style={{ color: "#e76300", fontSize: 35, fontWeight: "600" }}>{price} CFR</Text>
-                     <Text style={{ color: "gray", fontSize: 20, fontWeight: "600" }}>{categories}</Text>
-                     <Text style={{ color: "#000", fontSize: 35, fontWeight: "600" }}>{name}</Text>
-                     <Text style={{ color: "#000", fontSize: 20, fontWeight: "600" }}>{product.id}</Text>
-                     <HTML source={{ html: `${short_description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} />
+               />
+               <View style={{ padding: 20 }}>
+                  <Text style={{ color: "gray", fontSize: 11, marginTop: 10, marginBottom: 10 }}>{categories}</Text>
+                  <View style={{
+                     flexDirection: "row",
+                     justifyContent: "space-between",
+                     marginBottom: 10
+                  }}>
+                     <Text style={{ color: "#000", fontWeight: "bold", width: ((PARAMS.SCREEN_WIDTH / 2) + 20), fontSize: 20, }}>{name}</Text>
+                     <Text style={{ color: "#e76300", fontSize: 20, fontWeight: "bold" }}>{prix} CFR</Text>
                   </View>
-               </ScrollView>
 
-               <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                  <AddToCartBtn id={id.toString()} permalink={permalink} prix={price} name={name} img={images} />
-                  <Pressable onPress={() => navigation.navigate('order', { id: id })}>
-                     <View style={{
-                        width: (PARAMS.SCREEN_WIDTH / 2),
-                        backgroundColor: '#006dd2'
-                     }}>
-                        <Text style={styles.btnText}><MaterialCommunityIcons name="basket" color={"#fff"} size={20} /> Acheter</Text>
-                     </View>
-                  </Pressable>
+                  <HTML source={{ html: `${description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} tagsStyles={{
+                     ul: {
+                        padding:0,
+                        margin:0,
+                     },
+                     li: {
+                        padding:0,
+                        margin:0,
+                     }
+                  }}  />
                </View>
+            </ScrollView>
+
+            <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+
+               <AddToCartBtn id={id.toString()} permalink={permalink} prix={prix} name={name} img={url} />
+
                <Pressable onPress={() => Linking.openURL(`tel:+2250574641453`)}>
                   <View style={{
-                     width: (PARAMS.SCREEN_WIDTH),
-                     borderWidth: 2,
-                     borderColor: "orange"
+                     justifyContent: "center",
+                     alignItems: "center",
+                     width: 50,
+                     height: 50,
+                     borderRadius: 50,
+                     backgroundColor: "#f5aa42",
+
                   }}>
-                     <Text style={styles.callBtn}><MaterialCommunityIcons name="phone" color={"orange"} size={20} /> +225 05 84 47 24 64</Text>
+                     <MaterialCommunityIcons name="phone" color={"#000"} size={20} />
+                  </View>
+
+               </Pressable>
+               <Pressable onPress={() => navigation.navigate('order', { id: id })}>
+                  <View style={{
+                     width: ((PARAMS.SCREEN_WIDTH / 2) + 10),
+                     backgroundColor: '#006dd2',
+                     borderRadius: 50,
+                  }}>
+                     <Text style={styles.btnText}><MaterialCommunityIcons name="basket" color={"#fff"} size={20} /> Acheter</Text>
                   </View>
                </Pressable>
-            </>
-         )}
+
+            </View>
+         </>
 
       </View>
    )

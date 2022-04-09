@@ -7,12 +7,17 @@ const SCREEN_WIDTH = Dimensions.get('screen').width
 function ContactUsScreen() {
 
     return (
-        <View>
+        <View style={{
+            padding:20
+        }}>
             <View style={styles.constacts}>
-                <Text>+224 05758978</Text>
+                <Text style={styles.text}>+224 05758978</Text>
             </View>
             <View style={styles.constacts}>
-                <Text>{PHONE_1}</Text>
+                <Text  style={styles.text}>{PHONE_1}</Text>
+            </View>
+            <View style={styles.constacts}>
+                <Text  style={styles.text}>zangochap@infi.com</Text>
             </View>
         </View>
     )
@@ -21,11 +26,15 @@ function ContactUsScreen() {
 const styles = StyleSheet.create({
 
     constacts: {
-        padding: 11,
+        borderRadius:20,
+               padding: 20,
         backgroundColor: "orange",
-        width: SCREEN_WIDTH,
-        marginBottom: 5
-
+        width: "100%",
+        marginBottom: 5,
+    },
+    text:{
+        color:"#fff",
+        fontSize:16,
     }
 })
 

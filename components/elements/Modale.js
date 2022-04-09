@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, TouchableOpacity, SecureStore } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, TouchableOpacity } from "react-native";
 
 
-async function getValueFor(key) {
-    let result = await SecureStore.getItemAsync(key);
-    if (result) {
-        return result
-    } else {
-        alert('No values stored under that key.');
-    }
-}
+
 
 
 
@@ -40,7 +33,7 @@ const Modale = () => {
                     />
                     <TouchableOpacity onPress={async () => {
                         setModalVisible(!modalVisible)
-                        console.log(number)
+                 
                     }} style={{ width: "100%", alignItems: "center" }}>
                         <View style={{ width: "90%", backgroundColor: "#fff", padding: 18, borderRadius: 5, marginTop: 35 }}>
                             <Text style={{ color: "#ff6200", fontSize: 18, textAlign: "center" }}>RECEVOIR MON CADEAU</Text>

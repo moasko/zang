@@ -1,10 +1,13 @@
 import React from 'react'
-import { Pressable, ToastAndroid, Text, View, Image} from 'react-native'
+import { Pressable, ToastAndroid, Text, View, Image } from 'react-native'
 import Style from './CardStyle'
 import PARAMS from '../../config/contes';
-//redux
-import { addToCart,singleProduct } from "../../redux/actions/products";
+import { useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch, useSelector } from 'react-redux';
 
+//redux
+import { addToCart, singleProduct } from "../../redux/actions/products";
 
 
 function showToast(message) {
@@ -12,8 +15,21 @@ function showToast(message) {
 }
 
 
+const Item = ({ id, url, name, prix, preprix, categories, permalink, description }) => {
 
-const Item = ({ id, url, name, prix, preprix, categories, nav, permalink }) => {
+  const productSendToNavigation = {
+    id,
+    url,
+    name,
+    prix,
+    preprix,
+    categories,
+    permalink,
+    description
+  }
+
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
 
 
   function addToPorductsCart() {
@@ -24,29 +40,40 @@ const Item = ({ id, url, name, prix, preprix, categories, nav, permalink }) => {
 
 
   function handleSelectProduct() {
-    nav.navigate('SingleProduct', { product_id:id})
+    navigation.navigate('SingleProduct', { parametters: productSendToNavigation });
   }
+
+
 
   return (
     <Pressable
       style={Style.item}
       onPress={() => handleSelectProduct()} >
       <Image style={Style.productImage} source={{ uri: url }} />
-      <View style={Style.badg}>
+      <View style={Style.productInfo}>
+        
+      {/* <View style={Style.badg}>
         <Text style={{ color: "#ff0000" }}>-{Math.round((prix * 100) / preprix)}%</Text>
-      </View>
+      </View> */}
+      
       <View style={Style.title}>
+        <Text numberOfLines={1} style={{ fontSize: 16, fontWeight: "bold" }}>{name}</Text>
         <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
-        <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{id}</Text>
-        <Text numberOfLines={1} style={{ fontSize: 15 }}>{name}</Text>
-        <Text style={{ color: "#ffd5b8", fontSize: 10, fontWeight: "bold", fontStyle: "italic" }}>{preprix} {PARAMS.DEVIS}</Text>
-        <Text style={{ color: "#e84500", fontSize: 20, fontWeight: "bold" }}>{prix} {PARAMS.DEVIS}</Text>
       </View>
-      <Pressable onPress={() => addToPorductsCart()}>
-        <View style={Style.addToCartBtn}>
-          <Text style={{ color: "#fff", fontSize: 15 }}>Ajouter au panier</Text>
-        </View>
-      </Pressable>
+      <View style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+      }}>
+        <Text style={{ color: "#e84500", fontSize: 15, fontWeight: "bold" }}>{prix} {PARAMS.DEVIS}</Text>
+        <Pressable onPress={() => addToPorductsCart()}>
+          <View style={Style.addToCartBtn}>
+            <Text style={{ color: "#fff", fontSize: 15 }}><MaterialCommunityIcons name="basket" color={"#fff"} size={15} /></Text>
+          </View>
+        </Pressable>
+      </View>
+</View>
     </Pressable>
   );
 }

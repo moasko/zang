@@ -1,6 +1,7 @@
 import { decode, encode } from 'base-64'
 import axios from "axios";
-import { ALL_PRODUCTS, ALL_CATEGORIES, GET_PRODUCTS_BY_CATEGORIE, SINGLE_PRODUCT } from "../api";
+import { ALL_PRODUCTS, ALL_CATEGORIES, SINGLE_PRODUCT } from "../api";
+
 
 if (!global.btoa) {
     global.btoa = encode;
@@ -16,12 +17,14 @@ const authData = {
 }
 
 
-export const getAllProducts = (page, per_page) => {
+export const getAllProducts = (curPage,per_page) => {
+    console.log("page"+curPage)
     return new Promise((resolve, reject) => {
         axios.get(ALL_PRODUCTS, {
-            auth: authData, params: {
+            auth: authData, 
+            params: {
+                page:curPage,
                 per_page: per_page,
-                page: page
             }
         })
             .then(res => {
@@ -32,6 +35,7 @@ export const getAllProducts = (page, per_page) => {
             })
     })
 }
+
 
 export const getProductsByCategory = (id) => {
     return new Promise((resolve, reject) => {
@@ -67,6 +71,25 @@ export const getSingleProduct = (id) => {
 export const getAllCategories = () => {
     return new Promise((resolve, reject) => {
         axios.get(ALL_CATEGORIES, { auth: authData })
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(err => {
+                reject(err);
+            })
+    })
+}
+
+
+export const searchProduct = (search) => {
+    return new Promise((resolve, reject) => {
+        axios.get(ALL_PRODUCTS, {
+            auth: authData,
+            params: {
+                search: search,
+                per_page:80
+            }
+        })
             .then(res => {
                 resolve(res.data);
             })
