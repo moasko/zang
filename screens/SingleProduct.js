@@ -25,6 +25,13 @@ function SingleProduct({ route }) {
       description
    } = parametters;
 
+
+   const order =[{
+      product_id: id,
+      quantity: 1,
+   }]
+
+
    return (
       <View style={{ flex: 1 }}>
          <>
@@ -52,14 +59,14 @@ function SingleProduct({ route }) {
 
                   <HTML source={{ html: `${description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} tagsStyles={{
                      ul: {
-                        padding:0,
-                        margin:0,
+                        padding: 0,
+                        margin: 0,
                      },
                      li: {
-                        padding:0,
-                        margin:0,
+                        padding: 0,
+                        margin: 0,
                      }
-                  }}  />
+                  }} />
                </View>
             </ScrollView>
 
@@ -81,7 +88,7 @@ function SingleProduct({ route }) {
                   </View>
 
                </Pressable>
-               <Pressable onPress={() => navigation.navigate('order', { id: id })}>
+               <Pressable onPress={() => navigation.navigate('order', { order })}>
                   <View style={{
                      width: ((PARAMS.SCREEN_WIDTH / 2) + 10),
                      backgroundColor: '#006dd2',

@@ -16,7 +16,6 @@ const ProductsListe = ({
   data,
   loading = false,
   listeLimite = 50,
-  currntPage = 1,
   headerComponent = null,
   footerComponent=null
 }) => {

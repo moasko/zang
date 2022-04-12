@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, TextInput, StyleSheet, Button, ScrollView, Dimensions, ActivityIndicator, Pressable,TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView, Dimensions, ActivityIndicator, Pressable, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import API from '../components/config';
 import { resetCart } from '../redux/actions/products';
@@ -11,19 +11,33 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
 
 const myIcon = <Icon name="cart-outline" size={30} color="#fff" />;
-const checkmark = <Icon name="checkmark" size={40} color="green"  />;
-function GetDate(){
+const checkmark = <Icon name="checkmark" size={40} color="green" />;
+
+function GetDate() {
   let d = new Date()
   let h = d.getHours()
-return h>=17? (<Text style={{padding:15 ,fontWeight:"bold",textAlign:"center"}}>une commercial va prendre contact avec vous d'he demain a partir de 8H</Text>):(<Text>une commercial va prendre contact avec vous dans moin de 2 minuts</Text>)
+  let day = d.getDay()
+  switch (h) {
+    case h >= 17 && day < 6:
+      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Une commercial va prendre contacte avec vous demain entre 8-10h</Text>
+    case h < 17 && h > 8 && day < 6:
+      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Une commercial va prendre contacte avec vous dans moins de 5 mins</Text>
+    case h < 8 && day < 6:
+      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Une commercial va prendre contacte avec vous aujourdhuit entre 8-10h</Text>
+    default:
+      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Votre commande sera livré à partir de 0h</Text>
+  }
 }
+
+
 
 function Loading() {
   return (
     <View style={{
       width: SCREEN_WIDTH,
-      height: SCREEN_HEIGHT - 80,
+      height: SCREEN_HEIGHT,
       position: "absolute",
+      bottom: 0,
       backgroundColor: "rgba(52, 52, 52, 0.8)",
       zIndex: 56,
       alignItems: "center",
@@ -53,7 +67,8 @@ function Loaded() {
   return (
     <View style={{
       width: SCREEN_WIDTH,
-      height: SCREEN_HEIGHT - 80,
+      height: SCREEN_HEIGHT,
+      bottom: 0,
       position: "absolute",
       backgroundColor: "rgba(52, 52, 52, 0.8)",
       zIndex: 56,
@@ -61,7 +76,7 @@ function Loaded() {
       justifyContent: "center"
     }}>
       <View style={{
-        padding:15,
+        padding: 15,
         width: "85%",
         height: 250,
         backgroundColor: "#fff",
@@ -70,11 +85,11 @@ function Loaded() {
         alignItems: "center",
         flexDirection: "column"
       }}>
-        <Text style={{color:"#696969",marginBottom: 17, fontSize:20, fontWeight: "bold",textAlign:"center" }}>Votre Commande a bien été valider</Text>
+        <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Votre Commande a bien été valider</Text>
         <Text>{checkmark}</Text>
-       <GetDate/>
-        <TouchableOpacity style={styles.customBtn} onPress={()=>navigation.navigate('home')} >
-          <Text style={{color:"#fff",fontSize:15,textAlign:"center"}}>continué</Text>
+        <GetDate />
+        <TouchableOpacity style={styles.customBtn} onPress={() => navigation.navigate('home')} >
+          <Text style={{ color: "#fff", fontSize: 15, textAlign: "center" }}>continué</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -82,19 +97,24 @@ function Loaded() {
 }
 
 const OrderScreen = ({ route }) => {
-  let {order} = route.params
+
   const [code, setCode] = useState(null)
   const [nom, setNom] = useState(null)
   const [prenom, setPrenom] = useState(null)
   const [tel1, setTel1] = useState(null)
   const [tel2, setTel2] = useState(null)
   const [lieu, setLieu] = useState(null)
+  const [email, setEmail] = useState("moasko.dev@gmail.com")
 
   const [respons, setRespons] = useState('')
   const [isLoading, setLoading] = useState(false);
-  const [isLoaded,setLoaded]=useState(false)
+  const [isLoaded, setLoaded] = useState(false)
 
   const dispatch = useDispatch()
+
+
+  const { order } = route.params
+
 
   let data = {
     payment_method: "bacs",
@@ -109,7 +129,7 @@ const OrderScreen = ({ route }) => {
       state: "CI",
       postcode: "",
       country: "CI",
-      email: "",
+      email: email,
       phone: tel1
     },
     shipping: {
@@ -137,6 +157,7 @@ const OrderScreen = ({ route }) => {
     API.post('orders', data)
       .then(response => {
         setRespons(response)
+        console.log(response)
       })
       .catch(error => {
       }).finally(() => {
@@ -146,40 +167,79 @@ const OrderScreen = ({ route }) => {
       })
   }
 
+  console.log(order)
 
   return (
-    <View style={{ padding: 5}}>
-      {isLoading ? <Loading/> : null} 
-      {isLoaded ? <Loaded/>:null}
+    <View style={{ padding: 10 }}>
+      {isLoading ? <Loading /> : null}
+      {isLoaded ? <Loaded /> : null}
       <ScrollView>
         <Text style={styles.title}>VALIDATION DE COMMANDE</Text>
         <View>
-          <View style={{ padding: 10, marginBottom: 20,backgroundColor:"#039181" ,borderRadius:10}}>
+          <View style={{ padding: 10, marginBottom: 20, backgroundColor: "#039181", borderRadius: 10 }}>
             <Text style={{ textAlign: "center" }}>Avez vous un code promo ?</Text>
-            <Text style={{color:"#ffffff",textAlign:"center",marginBottom:10,marginTop:10}}>vous n'etre pas abliger de remprire ce champ si vous n'avez pas de code coupon </Text>
+            <Text style={{ color: "#ffffff", textAlign: "center", marginBottom: 10, marginTop: 10 }}>Vous n'êtes pas obligé de remplir ce champ si vous n'avez pas de code promo. </Text>
             <TextInput style={styles.inputStyle} placeholder="Votre code promo" onChangeText={setCode} value={code} />
           </View>
 
-          <Text>Nom</Text>
-          <TextInput style={styles.inputStyle} placeholder="Nom" onChangeText={setNom} value={nom} />
-          <Text>Prenom</Text>
-          <TextInput style={styles.inputStyle} placeholder="Prenom" onChangeText={setPrenom} value={prenom} />
-          <Text>Téléphone 1</Text>
-          <TextInput keyboardType="number-pad" dataDetectorTypes="phoneNumber" autoCompleteType="tel" style={styles.inputStyle} placeholder="Téléphone 1" onChangeText={setTel1} value={tel1} />
-          <Text>Téléphone 2</Text>
-          <TextInput keyboardType="number-pad" dataDetectorTypes="phoneNumber" style={styles.inputStyle} placeholder="Téléphone 2" onChangeText={setTel2} value={tel2} />
-          <Text>Lieu de livraison</Text>
-          <TextInput style={styles.inputStyle} placeholder="Lieu de livraison" onChangeText={setLieu} value={lieu} />
+          <Text style={styles.inputLabel}>Nom</Text>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Nom"
+            onChangeText={setNom}
+            value={nom}
+          />
+
+          <Text style={styles.inputLabel}>Prenom</Text>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Prenom"
+            onChangeText={setPrenom}
+            value={prenom}
+          />
+
+
+          <Text style={styles.inputLabel}>Téléphone 1</Text>
+          <TextInput
+            keyboardType="number-pad"
+            dataDetectorTypes="phoneNumber"
+            autoCompleteType="tel"
+            style={styles.inputStyle}
+            placeholder="Téléphone 1"
+            onChangeText={setTel1}
+            value={tel1}
+          />
+
+          <Text style={styles.inputLabel}>Téléphone 2</Text>
+          <TextInput
+            keyboardType="number-pad"
+            dataDetectorTypes="phoneNumber"
+            style={styles.inputStyle}
+            placeholder="Téléphone 2"
+            onChangeText={setTel2}
+            value={tel2}
+          />
+
+          <Text style={styles.inputLabel}>Lieu de livraison</Text>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Lieu de livraison"
+            onChangeText={setLieu}
+            value={lieu}
+          />
 
 
         </View>
 
- <Pressable onPress={Post} style={{alignItems:"flex-end"}}>
+        <Pressable onPress={() => {
+          Post()
+          console.log(data)
+        }
+        } style={{ alignItems: "flex-end" }}>
           <View style={{
             width: 150,
             height: 60,
             padding: 10,
-            borderRadius: 50,
             backgroundColor: "#e76300",
             justifyContent: "center",
             alignItems: "center"
@@ -193,7 +253,7 @@ const OrderScreen = ({ route }) => {
         </Pressable>
       </ScrollView>
 
-       
+
 
     </View>
   )
@@ -204,8 +264,10 @@ const styles = StyleSheet.create({
   inputStyle: {
     marginBottom: 10,
     padding: 10,
-    borderRadius: 10,
-    backgroundColor: "#dbdbdb"
+    borderWidth: 1,
+    borderColor: "#ebebeb",
+    backgroundColor: "#fff",
+    borderRadius: 5
   },
   title: {
     textAlign: "center",
@@ -214,11 +276,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10
   },
-  customBtn:{
-    backgroundColor:"#3880d1",
-    padding:15,
-    width:"100%",
-    borderRadius:7
+  customBtn: {
+    backgroundColor: "#3880d1",
+    padding: 15,
+    width: "100%",
+    borderRadius: 7
+  },
+  inputLabel: {
+    marginLeft: 14,
+    color: "gray",
+    fontSize: 11
   }
 })
 

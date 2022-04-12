@@ -13,7 +13,6 @@ import InternetConnectionAlert from "react-native-internet-connection-alert";
 
 
 
-
 LogBox.ignoreLogs(['Remote debugger']);
 const Stack = createStackNavigator();
 

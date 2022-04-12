@@ -10,7 +10,8 @@ import {
     SET_PRODUCTS_BY_CATEGORIE,
     SINGLE_PRODUCT,
     SEARCH_PRODUCTS,
-    PAGINATIONGINATION
+    PAGINATION,
+    ALL_PRODS
 } from "../constants";
 
 export const getProducts = (products) => {
@@ -97,7 +98,14 @@ export const searchProductsAction =(products)=>{
 
 export const paginationAction =(page)=>{
     return {
-        type:PAGINATIONGINATION,
+        type:PAGINATION,
         payload:page
+    }
+}
+
+export const getProdsAction = (product) => {
+    return {
+        type: ALL_PRODS,
+        payload: product
     }
 }

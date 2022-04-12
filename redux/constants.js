@@ -22,3 +22,5 @@ export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 
 
 export const PAGINATION = 'PAGINATION';
+
+export const All_PRODS = 'ALL_PRODS';

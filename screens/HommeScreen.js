@@ -1,18 +1,36 @@
 import React, { useState, useEffect,useRef } from 'react';
-import { ActivityIndicator, View,SafeAreaView } from 'react-native';
+import { ActivityIndicator, View,SafeAreaView,Text,TouchableOpacity } from 'react-native';
 
 import Cate from '../components/elements/Categoris'
 //product card
-import Modale from '../components/elements/Modale'
 import { getAllProducts } from '../utils/backend/products';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/actions/products';
 import ProductsListe from '../components/ProductCard/ProductsListe';
 
 
-//declaration des variables 
 
+const SeeMoreButton = () => {
+  return (
+    <TouchableOpacity style={{
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 10,
+      backgroundColor: "#000",
+      padding: 10,
+    }}>
+      <Text style={{
+        color: "#fff",
+        fontWeight: "bold",
+        fontSize: 15,
+        marginRight: 10
+      }}>Voir plus</Text>
+    </TouchableOpacity>
+  )
+}
 
+ 
 
 
 function HomeScreen({ navigation }) {
@@ -56,9 +74,9 @@ let vue = useRef(true);
       data={products}
       listeLimites={limite}
       headerComponent={<Cate/>}
+      footerComponent={<SeeMoreButton/>}
       />
         )}
-      <Modale />
     </SafeAreaView>
   )
 }

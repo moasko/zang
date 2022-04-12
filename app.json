@@ -19,16 +19,23 @@
     "ios": {
       "supportsTablet": true
     },
-    "notification": {
-      "icon": "./assets/48x48.png"
-    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/48x48.png",
+          "color": "#ffffff"
+        }
+      ]
+    ],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "useNextNotificationsApi": true,
-      "package": "com.moasko.zangochap"
+      "package": "com.moasko.zangochap",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

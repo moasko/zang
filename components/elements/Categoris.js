@@ -15,6 +15,7 @@ function ViewAll() {
   return (
     <View style={styles.alllign}>
       <Text style={{ color: "#fff", fontWeight: "700" }}>PRODUISTS</Text>
+
       <Pressable onPress={() => navigation1.navigate('allProducts')}>
         <Text style={{ color: "#fff" }}>Voir Tout</Text>
         </Pressable>
@@ -81,8 +82,6 @@ const Cates = () => {
         )}
 <ViewAll />
     </SafeAreaView>
-
-
   );
 }
 
@@ -108,7 +107,15 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
     padding: 3,
-    backgroundColor: '#e84500',
+    backgroundColor: '#fff',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   title: {
     borderTopLeftRadius: 50,
@@ -121,6 +128,9 @@ const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center',
     fontSize: 9,
+    borderWidth: 2,
+    borderColor: '#fff'
+
   },
   alllign: {
     width: PARAMS.SCREEN_WIDTH,
@@ -131,8 +141,6 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     backgroundColor: 'red',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
   }
 });
 

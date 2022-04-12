@@ -6,7 +6,7 @@ import PARAMS from '../../config/contes'
 const AddToCartBtn = ({ id, permalink, prix, name, img }) => {
 
     const initiateWhatsAppSMS = () => {
-        const PhoneNumber = "+2250584472464"
+        const PhoneNumber = "+2250574641453"
         const text = `
         Salut Zangochap je souhaite passer une commande de ce produit
     %0a*Nom du produit* : ${name}

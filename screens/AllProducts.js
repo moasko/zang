@@ -1,40 +1,40 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ActivityIndicator, View, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts } from '../utils/backend/products';
 import ProductsListe from '../components/ProductCard/ProductsListe';
 import Pagination from '../components/elements/Pagination';
-
-
+import { paginationAction, getProdsAction } from '../redux/actions/products'
+import API from '../components/config';
 
 function AllProducts({ navigation }) {
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [limite, setLimite] = useState(50)
+    const [limite, setLimite] = useState(20)
+    const [curentPage, setCurentPage] = useState(1)
 
-    const [currentPage, setCurrentPage] = useState(2)
 
     const dispatch = useDispatch();
-    const products = useSelector(state => state.products.products)
 
-    const getAllProduct = () => {
+    const products = useSelector(state => state.pagination.products);
+    const page = useSelector(state => state.pagination.page);
+
+    useEffect(() => {
         setLoading(true)
-        getAllProducts(currentPage, limite)
+        API.get('products', {
+            per_page: limite,
+            page: curentPage
+        })
             .then(res => {
-                dispatch(setProducts(res))
+                dispatch(paginationAction({
+                    page: curentPage,
+                    products: res
+                }))
+                setLoading(false)
             })
             .catch(err => {
                 setError(err)
             })
-            .finally(() => {
-                setLoading(false)
-            })
-    }
-
-
-    useEffect(() => {
-        getAllProduct()
-    }, [products === null, currentPage])
+    }, [products=="",curentPage])
 
 
     return (
@@ -47,14 +47,12 @@ function AllProducts({ navigation }) {
                         data={products}
                         listeLimitet={limite}
                         footerComponent={<Pagination
-                            page={currentPage}
+                            page={page}
                             setNext={() => {
-                                setCurrentPage(currentPage + 1)
+                                setCurentPage(curentPage + 1)
                             }}
                             setPrev={() => {
-                                if (currentPage > 1) {
-                                    setCurrentPage(currentPage - 1)
-                                }
+                                setCurentPage(curentPage - 1)
                             }}
                         />}
                     />

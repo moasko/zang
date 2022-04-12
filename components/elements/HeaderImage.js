@@ -5,9 +5,8 @@ let SCREEN_WIDTH = Dimensions.get('window').width
 
 
 const Data = [
-    { id: 1, img: "https://ci.jumia.is/cms/1_2021/W17/CI_W39_MSX_DESTOCKAGE.jpg" },
-    { id: 3, img: "https://ci.jumia.is/cms/1_2021/W20/DAY1/Update/CI_W19_MS_ACD_INFINIX.jpg" },
-    { id: 4, img: "https://ci.jumia.is/cms/1_2021/W19/DAY1/CI_W19_MSX_GEN_DJASSA.gif" }
+    { id: 1, img: "https://www.zangochap.com/wp-content/uploads/2022/04/zangochap.png" },
+    { id: 4, img: "https://www.zangochap.com/wp-content/uploads/2022/04/z2.png" }
 ]
 
 const Item = ({ item }) => {
