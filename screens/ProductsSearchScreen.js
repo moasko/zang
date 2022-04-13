@@ -8,8 +8,6 @@ import SearchBar from "react-native-dynamic-search-bar";
 
 import { searchProduct } from '../utils/backend/products';
 
-
-
 function ProductsSearchScreen({ navigation }) {
   const [state, setState] = useState('')
   const [isloading, setLoading] = useState(false)

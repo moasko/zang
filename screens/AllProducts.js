@@ -9,7 +9,7 @@ import API from '../components/config';
 function AllProducts({ navigation }) {
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [limite, setLimite] = useState(20)
+    const [limite, setLimite] = useState(30)
     const [curentPage, setCurentPage] = useState(1)
 
 

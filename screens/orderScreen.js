@@ -13,23 +13,6 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const myIcon = <Icon name="cart-outline" size={30} color="#fff" />;
 const checkmark = <Icon name="checkmark" size={40} color="green" />;
 
-function GetDate() {
-  let d = new Date()
-  let h = d.getHours()
-  let day = d.getDay()
-  switch (h) {
-    case h >= 17 && day < 6:
-      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Une commercial va prendre contacte avec vous demain entre 8-10h</Text>
-    case h < 17 && h > 8 && day < 6:
-      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Une commercial va prendre contacte avec vous dans moins de 5 mins</Text>
-    case h < 8 && day < 6:
-      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Une commercial va prendre contacte avec vous aujourdhuit entre 8-10h</Text>
-    default:
-      return <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Votre commande sera livré à partir de 0h</Text>
-  }
-}
-
-
 
 function Loading() {
   return (
@@ -70,24 +53,47 @@ function Loaded() {
       height: SCREEN_HEIGHT,
       bottom: 0,
       position: "absolute",
-      backgroundColor: "rgba(52, 52, 52, 0.8)",
+      backgroundColor: "#e9eef0",
       zIndex: 56,
       alignItems: "center",
       justifyContent: "center"
     }}>
+
+      <View style={{
+        backgroundColor: "#fff",
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      >
+        <Text class={{
+          padding: 15,
+          width: "85%",
+          height: 250,
+          backgroundColor: "#fff",
+
+        }}>{checkmark}</Text>
+      </View>
+
+
       <View style={{
         padding: 15,
         width: "85%",
         height: 250,
-        backgroundColor: "#fff",
         borderRadius: 15,
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column"
       }}>
-        <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Votre Commande a bien été valider</Text>
-        <Text>{checkmark}</Text>
-        <GetDate />
+        <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Merci!</Text>
+        <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Votre Commande a bien été validé</Text>
+        <Text style={{ color: "#000", marginBottom: 17, fontSize: 16,  textAlign: "center" }}>
+          Une commerciale vous contactera dans les plus brefs délais
+        </Text>
+
+
         <TouchableOpacity style={styles.customBtn} onPress={() => navigation.navigate('home')} >
           <Text style={{ color: "#fff", fontSize: 15, textAlign: "center" }}>continué</Text>
         </TouchableOpacity>
@@ -104,7 +110,7 @@ const OrderScreen = ({ route }) => {
   const [tel1, setTel1] = useState(null)
   const [tel2, setTel2] = useState(null)
   const [lieu, setLieu] = useState(null)
-  const [email, setEmail] = useState("moasko.dev@gmail.com")
+  const [email, setEmail] = useState("")
 
   const [respons, setRespons] = useState('')
   const [isLoading, setLoading] = useState(false);
@@ -129,7 +135,7 @@ const OrderScreen = ({ route }) => {
       state: "CI",
       postcode: "",
       country: "CI",
-      email: email,
+      email: email != "" ? email : "moasko.dev@gmail.com",
       phone: tel1
     },
     shipping: {
@@ -210,7 +216,7 @@ const OrderScreen = ({ route }) => {
             value={tel1}
           />
 
-          <Text style={styles.inputLabel}>Téléphone 2</Text>
+          <Text style={styles.inputLabel}>Téléphone 2 ( facultatif )</Text>
           <TextInput
             keyboardType="number-pad"
             dataDetectorTypes="phoneNumber"
@@ -227,6 +233,15 @@ const OrderScreen = ({ route }) => {
             onChangeText={setLieu}
             value={lieu}
           />
+
+          <Text style={styles.inputLabel}>email</Text>
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Votre adresse email"
+            onChangeText={setEmail}
+            value={email}
+          />
+
 
 
         </View>
@@ -252,9 +267,6 @@ const OrderScreen = ({ route }) => {
           </View>
         </Pressable>
       </ScrollView>
-
-
-
     </View>
   )
 
@@ -286,7 +298,20 @@ const styles = StyleSheet.create({
     marginLeft: 14,
     color: "gray",
     fontSize: 11
+  },
+  orderValidationMessage: {
+    color: "red",
+    fontSize: 12,
+    marginLeft: 14
+  },
+  orderValidationMessageSuccess: {
+    color: "green",
+    fontSize: 12,
+    marginLeft: 14
   }
+  ,
+
+
 })
 
 export default OrderScreen;

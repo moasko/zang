@@ -9,7 +9,11 @@ import OrderScreen from './screens/orderScreen';
 import AllProducts from './screens/AllProducts';
 import ProductsSearchScreen from './screens/ProductsSearchScreen';
 import LogoTitle from './components/elements/Logo';
-import InternetConnectionAlert from "react-native-internet-connection-alert";
+import AllHeader from './components/elements/AllHeader';
+import Panier from './screens/Panier';
+
+
+
 
 
 
@@ -27,13 +31,6 @@ const MyStack = () => {
 
   return  (
   <NavigationContainer>
-     <InternetConnectionAlert
-      onChange={(connectionState) => {
-        setIsInternetAvailable(connectionState)
-      }}
-      title={"Problème de connexion Internet"}
-      message={"Veuillez vérifier votre connexion Internet svp"}
-    >
   
         <Stack.Navigator initialRouteName={"home"} screenOptions={{
           gestureEnabled:true
@@ -51,13 +48,22 @@ const MyStack = () => {
           <Stack.Screen name="SingleProduct" component={SingleProduct} options={{
             title: "Detail Produit"
           }} />
-          <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ title: "liste des categories" }} />
+          <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ 
+            title: "liste des categories",
+            headerTitle: props => <AllHeader  {...props} />
+            }} />
           <Stack.Screen name="order" component={OrderScreen} options={{ title: "Panier" }} />
-          <Stack.Screen name="allProducts" component={AllProducts} options={{ title: "Tout les produits" }} />
-          <Stack.Screen name="roductsSearchScreen" component={ProductsSearchScreen} options={{ title: "Rechercher un produit" }} />
-
+          <Stack.Screen name="allProducts" component={AllProducts} options={{
+             title: "Tout les produits" ,
+             headerTitle: props => <AllHeader {...props} />
+             }} />
+          <Stack.Screen name="roductsSearchScreen" component={ProductsSearchScreen} options={{
+             title: "Rechercher",
+             headerTitle: props => <AllHeader {...props} />
+             }} />
+          <Stack.Screen name="panier" component={Panier} options={{ title: "Mon Panier" }} />
+          
         </Stack.Navigator>
-        </InternetConnectionAlert>
       </NavigationContainer>)
   
 

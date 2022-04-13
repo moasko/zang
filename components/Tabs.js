@@ -23,7 +23,14 @@ const cart = useSelector(state => state.cart.cart);
 
   return (
     <SafeAreaProvider>
-      <Tab.Navigator>
+      <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#000',
+        inactiveTintColor: 'orange',
+        showLabel: true,
+      }}
+
+      >
 
         <Tab.Screen name="Home" component={HomeScreen} options={{
           tabBarLabel: 'Boutique',

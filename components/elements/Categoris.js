@@ -18,7 +18,7 @@ function ViewAll() {
 
       <Pressable onPress={() => navigation1.navigate('allProducts')}>
         <Text style={{ color: "#fff" }}>Voir Tout</Text>
-        </Pressable>
+      </Pressable>
     </View>
   )
 }
@@ -49,13 +49,13 @@ const Cates = () => {
   const categories = useSelector(state => state.categories.categories);
 
 
-  useEffect(() =>{
+  useEffect(() => {
     setLoading(true);
     getAllCategories().then(res => {
       dispatch(setCategories(res));
       setLoading(false);
     });
-  },[]);
+  }, []);
 
 
   const CatrenderItem = ({ item }) => (
@@ -67,7 +67,9 @@ const Cates = () => {
   );
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+    
+    >
       <HeaderImage />
       {isLoading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center", height: 150 }}>
         <ActivityIndicator size="large" color="#f77918" />
@@ -80,7 +82,7 @@ const Cates = () => {
             horizontal={true}
           />
         )}
-<ViewAll />
+      <ViewAll />
     </SafeAreaView>
   );
 }
@@ -118,14 +120,12 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50,
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
+    borderRadius: 10,
     marginTop: 5,
-    backgroundColor: '#e84',
+    backgroundColor: '#e76300',
     color: '#fff',
-    padding: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     textAlign: 'center',
     fontSize: 9,
     borderWidth: 2,

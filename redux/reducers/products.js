@@ -6,7 +6,7 @@ const initialState = {
     productsByCategorie: [],
     singleProduct: {},
     searchProducts: [],
-    page: 2
+    page: 1
 }
 
 

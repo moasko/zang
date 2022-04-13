@@ -68,9 +68,10 @@ export const setCategories = (categories) => {
 
 
 
-export const getPorductsByCategorie =()=>{
+export const getPorductsByCategorie =(product)=>{
     return {
-        type:GET_PRODUCTS_BY_CATEGORIE
+        type:GET_PRODUCTS_BY_CATEGORIE,
+        payload:product
     }
 }
 

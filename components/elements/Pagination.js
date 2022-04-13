@@ -13,7 +13,7 @@ export default function Pagination({ page,setPrev,setNext }) {
             alignItems: 'center',
             marginTop: 10,
         }}>
-            <TouchableOpacity
+         {page > 1 &&    <TouchableOpacity
             onPress={setPrev}
              style={{
                 width: '35%',
@@ -31,6 +31,7 @@ export default function Pagination({ page,setPrev,setNext }) {
                     Precedant
                 </Text>
             </TouchableOpacity>
+         }
             <View style={{
                 width: 50,
                 height: 50,

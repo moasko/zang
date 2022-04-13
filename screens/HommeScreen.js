@@ -7,28 +7,10 @@ import { getAllProducts } from '../utils/backend/products';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/actions/products';
 import ProductsListe from '../components/ProductCard/ProductsListe';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const SeeMoreButton = () => {
-  return (
-    <TouchableOpacity style={{
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 10,
-      backgroundColor: "#000",
-      padding: 10,
-    }}>
-      <Text style={{
-        color: "#fff",
-        fontWeight: "bold",
-        fontSize: 15,
-        marginRight: 10
-      }}>Voir plus</Text>
-    </TouchableOpacity>
-  )
-}
 
  
 
@@ -41,6 +23,7 @@ function HomeScreen({ navigation }) {
 
   const dispatch = useDispatch();
   const products = useSelector(state => state.products.products)
+
 
 let vue = useRef(true);
   useEffect(() => {
@@ -63,6 +46,33 @@ let vue = useRef(true);
       vue.current = false;
     }
   }, [products === null,limite])
+
+
+
+  const SeeMoreButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('allProducts')
+        }}
+      style={{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 10,
+        backgroundColor: "#000",
+        padding: 10,
+      }}>
+        <Text style={{
+          color: "#fff",
+          fontWeight: "bold",
+          fontSize: 15,
+          marginRight: 10
+        }}>Voir plus</Text>
+      </TouchableOpacity>
+    )
+  }
+  
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

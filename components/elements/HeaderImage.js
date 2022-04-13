@@ -34,6 +34,8 @@ const Item = ({ item }) => {
 function HeaderImage() {
     return (
         <FlatList
+        decelerationRate="fast"
+        snapToInterval={SCREEN_WIDTH}
             data={Data}
             renderItem={Item}
             horizontal={true}

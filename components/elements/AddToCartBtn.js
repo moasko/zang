@@ -3,12 +3,12 @@ import { View, Pressable, Text, StyleSheet, Linking } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PARAMS from '../../config/contes'
 
-const AddToCartBtn = ({ id, permalink, prix, name, img }) => {
+const AddToCartBtn = ({ permalink, prix, name}) => {
 
     const initiateWhatsAppSMS = () => {
         const PhoneNumber = "+2250574641453"
         const text = `
-        Salut Zangochap je souhaite passer une commande de ce produit
+        Salut Zangochap, je souhaite passer une commande de ce produit.
     %0a*Nom du produit* : ${name}
     %0a*Prix*:${prix} ${PARAMS.DEVIS}
     %0a*Produit sur le site*:${permalink}`
@@ -27,12 +27,12 @@ const AddToCartBtn = ({ id, permalink, prix, name, img }) => {
 
         <Pressable onPress={() => initiateWhatsAppSMS()} >
             <View style={{
-             justifyContent: "center",
-             alignItems: "center",
-             width: 50,
-             height: 50,
-             borderRadius: 50,
-            backgroundColor: '#0ac352'
+                justifyContent: "center",
+                alignItems: "center",
+                width: 50,
+                height: 50,
+                borderRadius: 50,
+                backgroundColor: '#0ac352'
             }}>
                 <Text style={styles.btnText}> <MaterialCommunityIcons name="whatsapp" color={"#fff"} size={20} /></Text>
             </View>

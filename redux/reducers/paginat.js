@@ -1,7 +1,7 @@
 import { PAGINATION,All_PRODS } from "../constants";
 
 const initialState = {
-    page: 2,
+    page: 1,
     products: [],
 };
 

@@ -1,34 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, TouchableOpacity } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
-
-
-const storeInfos = async (userinfos) => {
-    try {
-      await AsyncStorage.setItem('userinfos', JSON.stringify(userinfos));
-    } catch (e) {
-      console.log('fail to insert userinfos')
-    }
-
-  }
-
-
-  const getInfos = async () => {
-    try {
-      const value = await AsyncStorage.getItem('userinfos');
-      if (value !== null) {
-        setUserData(JSON.parse(value))
-        console.log(userData)
-      }
-    } catch (error) {
-      console.log('fail to get userinfos')
-    }
-  }
 
   
-
 const Modale = () => {
     const [modalVisible, setModalVisible] = useState(true);
     const [number, onChangeNumber] = React.useState(null);
