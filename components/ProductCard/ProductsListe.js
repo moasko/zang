@@ -1,32 +1,17 @@
 //product card
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect, useRef } from 'react';
-import { ActivityIndicator, View,Text, FlatList } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState} from 'react';
+import { View, FlatList } from 'react-native';
 import PARAMS from '../../config/contes';
-import { setProducts } from '../../redux/actions/products';
-import { getAllProducts } from '../../utils/backend/products';
-import Pagination from '../elements/Pagination';
 import Item from './ProductCard';
-
-
-
 
 const ProductsListe = ({
   data,
   loading = false,
-  listeLimite = 50,
   headerComponent = null,
   footerComponent=null
 }) => {
 
-
   const[isLoading,setIsLoadding]=useState(loading)
-
-
-  //redux
-
-
   class RenderItem extends React.PureComponent {
     render() {
       const { item } = this.props;
@@ -77,9 +62,6 @@ const ProductsListe = ({
           scrollEventThrottle={400}
           ListHeaderComponent={headerComponent}
           ListFooterComponent={footerComponent}
-          onEndReached={({ distanceFromEnd }) => {
-            console.log("limite", listeLimite)
-          }}
         />
     </View>
   )

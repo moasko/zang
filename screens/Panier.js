@@ -5,8 +5,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { deleteToCart,setCartItemQuantity } from '../redux/actions/products';
 import { useNavigation } from '@react-navigation/native';
 
+
 //redux
 import { useSelector, useDispatch } from 'react-redux';
+import PARAMS from '../config/contes';
 export default function Panier({ route }) {
 
   const panier = useSelector(state => state.cart.cart);
@@ -70,10 +72,10 @@ export default function Panier({ route }) {
                       <Text style={{fontSize:16,fontWeight:"bold"}}>{item.name}</Text>
                       <Text style={{
                         fontSize: 14,
-                      }}>PUHT : {item.prix} fr</Text>
+                      }}>prix unitaire : {item.prix} {PARAMS.DEVIS}</Text>
                       <Text style={{
                         fontSize: 14,
-                      }}>sous total : {item.prix * item.qt} fr</Text>
+                      }}>sous total : {item.prix * item.qt} {PARAMS.DEVIS}</Text>
 
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10}}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -112,7 +114,7 @@ export default function Panier({ route }) {
           <Text style={{
             fontSize: 20,
             fontWeight: 'bold',
-          }}>Total : {total} fr</Text>
+          }}>Total : {total} {PARAMS.DEVIS}</Text>
         </View>
 
         <Pressable onPress={() => navigation.navigate('order',{order})}  style={{

@@ -1,17 +1,31 @@
 import React from 'react'
-import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { View,Text, TouchableOpacity } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { Badge } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 
-const AllHeader = () => {
+const AllHeader = ({title}) => {
 
     const navigation = useNavigation();
     const cart = useSelector(state => state.cart.cart);
 
     return (
-        <View>
+        <View style={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+        }}>
+            <Text style={{
+                color: '#000',
+                fontSize: 20,
+                textAlign: 'center',
+                width: '70%',
+                fontWeight: 'bold',
+            }}>
+            {title}
+            </Text>
+            
             <TouchableOpacity style={{
                 alignSelf: "flex-end",
                 backgroundColor: "#ebebeb",

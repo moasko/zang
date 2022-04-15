@@ -54,7 +54,7 @@ function SingleProduct({ route }) {
                      marginBottom: 10
                   }}>
                      <Text style={{ color: "#000", fontWeight: "bold", width: ((PARAMS.SCREEN_WIDTH / 2) + 20), fontSize: 20, }}>{name}</Text>
-                     <Text style={{ color: "#e76300", fontSize: 20, fontWeight: "bold" }}>{prix} CFR</Text>
+                     <Text style={{ color: "#e76300", fontSize: 20, fontWeight: "bold" }}>{prix} {PARAMS.DEVIS}</Text>
                   </View>
 
                   <HTML source={{ html: `${description}` || "<code>Aucune description</code>" }} contentWidth={PARAMS.SCREEN_WIDTH} tagsStyles={{

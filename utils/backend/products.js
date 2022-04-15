@@ -37,11 +37,12 @@ export const getAllProducts = (curPage,per_page) => {
 }
 
 
-export const getProductsByCategory = (id) => {
+export const getProductsByCategory = (id,page) => {
     return new Promise((resolve, reject) => {
         axios.get(ALL_PRODUCTS, {
             auth: authData, params: {
-                category: id
+                category: id,
+                page:page,
             }
         })
             .then(res => {

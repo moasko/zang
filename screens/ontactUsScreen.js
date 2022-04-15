@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { StyleSheet, View,Dimensions, Text,Image } from 'react-native'
+import React from 'react';
+import { StyleSheet, View, Text,Image,TouchableOpacity, Linking } from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-const PHONE_1 = "+225 0584472464"
-const SCREEN_WIDTH = Dimensions.get('screen').width
+
 function ContactUsScreen() {
-
     return (
         <View style={{
             padding:20,
@@ -55,15 +54,31 @@ function ContactUsScreen() {
                     Tout droits réservés
                 </Text>
 
-            <View style={styles.constacts}>
-                <Text style={styles.text}>+224 05758978</Text>
-            </View>
-            <View style={styles.constacts}>
-                <Text  style={styles.text}>{PHONE_1}</Text>
-            </View>
-            <View style={styles.constacts}>
-                <Text  style={styles.text}>zangochap@infi.com</Text>
-            </View>
+            <TouchableOpacity 
+            onPress={()=>{
+                Linking.openURL('tel:+2250757330000')
+            }}
+             style={styles.constacts}>
+                <MaterialCommunityIcons name="phone" size={25} color="gray" />
+                <Text style={styles.text}>+225 07 57 33 00 00</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+            onPress={()=>{
+                Linking.openURL('tel:+2252721003875')
+            }}
+             style={styles.constacts}>
+                 <MaterialCommunityIcons name="phone" size={25} color="gray" />
+                <Text  style={styles.text}>+225 27 21 00 38 75</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            onPress={()=>{
+                Linking.openURL('mailto:zangochap@gmail.com')
+            }}
+             style={styles.constacts}>
+                    <MaterialCommunityIcons name="email" size={25} color="gray" />
+                <Text  style={styles.text}>zangochap@gmail.com</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -71,15 +86,16 @@ function ContactUsScreen() {
 const styles = StyleSheet.create({
 
     constacts: {
-        borderRadius:10,
-               padding: 10,
-        backgroundColor: "orange",
+        flexDirection: 'row',
+        alignItems: 'center',
+               padding:5,
         width: "100%",
         marginBottom: 1,
     },
     text:{
-        color:"#fff",
-        fontSize:16,
+        marginLeft:10,
+        color:"#000",
+        fontSize:15,
     }
 })
 

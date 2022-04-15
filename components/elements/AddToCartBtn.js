@@ -6,7 +6,7 @@ import PARAMS from '../../config/contes'
 const AddToCartBtn = ({ permalink, prix, name}) => {
 
     const initiateWhatsAppSMS = () => {
-        const PhoneNumber = "+2250574641453"
+        const PhoneNumber = "+2250757330000"
         const text = `
         Salut Zangochap, je souhaite passer une commande de ce produit.
     %0a*Nom du produit* : ${name}
@@ -17,7 +17,7 @@ const AddToCartBtn = ({ permalink, prix, name}) => {
             'whatsapp://send?text=' + text + '&phone=' + PhoneNumber;
         Linking.openURL(url)
             .then((data) => {
-                console.log('WhatsApp Opened');
+                console.log(data);
             })
             .catch(() => {
                 alert('Assurez-vous que Whatsapp est installé sur votre appareil');

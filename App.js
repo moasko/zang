@@ -1,5 +1,5 @@
 import { LogBox} from 'react-native';
-import React,{useState} from 'react';
+import React from 'react';
 import Tabs from './components/Tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -27,7 +27,6 @@ import { Provider } from 'react-redux';
 
 const MyStack = () => {
 
-  const [isInternetAvailable, setIsInternetAvailable] = useState(false);
 
   return  (
   <NavigationContainer>
@@ -50,16 +49,16 @@ const MyStack = () => {
           }} />
           <Stack.Screen name="ViewCat" component={ByCategoriesScreen} options={{ 
             title: "liste des categories",
-            headerTitle: props => <AllHeader  {...props} />
+            headerTitle: props => <AllHeader title={"catégorie"}  {...props} />
             }} />
           <Stack.Screen name="order" component={OrderScreen} options={{ title: "Panier" }} />
           <Stack.Screen name="allProducts" component={AllProducts} options={{
-             title: "Tout les produits" ,
-             headerTitle: props => <AllHeader {...props} />
+             title: "plus" ,
+             headerTitle: props => <AllHeader title={"plus de produits"} {...props} />
              }} />
           <Stack.Screen name="roductsSearchScreen" component={ProductsSearchScreen} options={{
              title: "Rechercher",
-             headerTitle: props => <AllHeader {...props} />
+             headerTitle: props => <AllHeader title={"recherche"} {...props} />
              }} />
           <Stack.Screen name="panier" component={Panier} options={{ title: "Mon Panier" }} />
           

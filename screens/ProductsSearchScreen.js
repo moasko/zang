@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Pressable } from 'react-native';
 import Item from '../components/ProductCard/ProductCard';
 import PARAMS from '../config/contes';
@@ -9,7 +9,6 @@ import SearchBar from "react-native-dynamic-search-bar";
 import { searchProduct } from '../utils/backend/products';
 
 function ProductsSearchScreen({ navigation }) {
-  const [state, setState] = useState('')
   const [isloading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
 
@@ -70,6 +69,10 @@ const searchProducts = async (search) => {
        cancelIconColor="#c6c6c6"
         placeholder="Rechercher un produit"
         onChangeText={(value) => setSearch(value)}
+        underlineColorAndroid="transparent"
+        returnKeyType="search"
+        accessibilityTraits="search"
+        accessibilityRole="search"
         value={search}
         onCancel={() => setSearch('')}
         onSubmitEditing={() =>{

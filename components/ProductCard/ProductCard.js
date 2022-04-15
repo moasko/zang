@@ -4,10 +4,10 @@ import Style from './CardStyle'
 import PARAMS from '../../config/contes';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 //redux
-import { addToCart, singleProduct } from "../../redux/actions/products";
+import { addToCart} from "../../redux/actions/products";
 
 
 function showToast(message) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, TouchableOpacity } from "react-native";
+import { Alert, Modal, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 
   
 const Modale = () => {

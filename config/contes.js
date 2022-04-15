@@ -5,7 +5,7 @@ const PARAMS ={
     SCREEN_WIDTH: Dimensions.get('window').width,
     SCREEN_HEIGHT: Dimensions.get('window').height,
     PROCUVTS_CARDES_BORDER_WIDTH: 1.5,
-    DEVIS :"CFA",
+    DEVIS :"FCFA",
     PROUCTS_IMG_PLACEHOLDER: "https://zangochap.com/wp-content/uploads/woocommerce-placeholder.png"
 }
 

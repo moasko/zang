@@ -1,21 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ActivityIndicator, Text, View, FlatList, SafeAreaView } from 'react-native';
-import API from '../components/config'
-import PARAMS from '../config/contes';
-import Item from '../components/ProductCard/ProductCard'
-
 
 import { setProductsByCategorie } from '../redux/actions/products';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsByCategory } from '../utils/backend/products';
 import ProductsListe from '../components/ProductCard/ProductsListe';
+import Pagination from '../components/elements/Pagination';
 
 
 function ByCategoriesScreen({ navigation, route }) {
   const [state, setState] = useState('')
   const [isloading, setLoading] = useState(true)
-
-  const { id } = route.params
+const [page , setPage] = useState(1)
+  const { id,title } = route.params
 
   const dispatch = useDispatch();
 
@@ -26,7 +23,7 @@ function ByCategoriesScreen({ navigation, route }) {
   useEffect(() => {
     vue.current = true;
     setLoading(true)
-    getProductsByCategory(id)
+    getProductsByCategory(id,page)
       .then(res => {
         if (vue) {
           dispatch(setProductsByCategorie(res.data))
@@ -42,14 +39,43 @@ function ByCategoriesScreen({ navigation, route }) {
     return () => {
       vue.current = false;
     }
-  }, [catProducts === []])
+  }, [catProducts === [],page])
+
+const CategoryListeHeader = (category) => {
+return(
+  <View style={{
+    width: '90%',
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    margin:20
+  }}>
+    <Text style={{fontSize:20,fontWeight:'bold',textAlign:"center",color:'#000'}}>{title}</Text>
+  </View>
+)
+}
+  
 
 
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {isloading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}><ActivityIndicator size="large" color="#f77918" /></View> : (
-        <ProductsListe  data={catProducts} />
+        <ProductsListe 
+         data={catProducts}
+         headerComponent={CategoryListeHeader}
+         footerComponent={<Pagination
+           page={page} 
+           setNext={()=>{
+              setPage(page+1)
+            }}
+            setPrev={()=>{
+              setPage(page-1)
+            }
+            }
+            />}
+          />
       )}
     </SafeAreaView>
 

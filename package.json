@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@freakycoder/react-native-bounceable": "^0.2.5",
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "~5.11.7",
@@ -19,11 +20,9 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-big-list": "^1.5.4",
     "react-native-dynamic-search-bar": "^2.0.2",
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "~2.1.0",
-    "react-native-internet-connection-alert": "^0.1.7",
     "react-native-mmkv": "^1.1.6",
     "react-native-reanimated": "~2.3.1",
     "react-native-render-html": "^5.1.0",

@@ -89,13 +89,13 @@ function Loaded() {
       }}>
         <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Merci!</Text>
         <Text style={{ color: "#696969", marginBottom: 17, fontSize: 20, fontWeight: "bold", textAlign: "center" }}>Votre Commande a bien été validé</Text>
-        <Text style={{ color: "#000", marginBottom: 17, fontSize: 16,  textAlign: "center" }}>
+        <Text style={{ color: "#000", marginBottom: 17, fontSize: 16, textAlign: "center" }}>
           Une commerciale vous contactera dans les plus brefs délais
         </Text>
 
 
         <TouchableOpacity style={styles.customBtn} onPress={() => navigation.navigate('home')} >
-          <Text style={{ color: "#fff", fontSize: 15, textAlign: "center" }}>continué</Text>
+          <Text style={{ color: "#fff", fontSize: 15, textAlign: "center" }}>CONTINUER</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -152,7 +152,7 @@ const OrderScreen = ({ route }) => {
     shipping_lines: [
       {
         method_id: "flat_rate",
-        method_title: "Flat Rate",
+        method_title: "livraison",
         total: "1000"
       }
     ]
@@ -163,17 +163,17 @@ const OrderScreen = ({ route }) => {
     API.post('orders', data)
       .then(response => {
         setRespons(response)
-        console.log(response)
       })
       .catch(error => {
+        console.log(error)
       }).finally(() => {
         setLoading(false)
         setLoaded(true)
         dispatch(resetCart())
+
       })
   }
 
-  console.log(order)
 
   return (
     <View style={{ padding: 10 }}>
@@ -248,14 +248,14 @@ const OrderScreen = ({ route }) => {
 
         <Pressable onPress={() => {
           Post()
-          console.log(data)
         }
         } style={{ alignItems: "flex-end" }}>
           <View style={{
-            width: 150,
-            height: 60,
-            padding: 10,
-            backgroundColor: "#e76300",
+            width: "100%",
+            backgroundColor: "#039181",
+            height: 50,
+            borderRadius: 10,
+            padding: 5,
             justifyContent: "center",
             alignItems: "center"
           }}>
@@ -263,7 +263,9 @@ const OrderScreen = ({ route }) => {
               fontSize: 22,
               textAlign: "center",
               color: "#fff",
-            }}>{myIcon}</Text>
+            }}>
+              <Text style={{ fontWeight: "bold" }}>VALIDER</Text>
+            </Text>
           </View>
         </Pressable>
       </ScrollView>

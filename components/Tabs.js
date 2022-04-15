@@ -7,7 +7,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import HomeScreen from '../screens/HommeScreen'
 import ProductsSearchScreen from '../screens/ProductsSearchScreen';
 import ContactUsScreen from '../screens/ontactUsScreen';
-import PromoScreeen from '../screens/PromoScreeen';
 import Panier from '../screens/Panier';
 import { useSelector } from 'react-redux';
 
@@ -25,8 +24,7 @@ const cart = useSelector(state => state.cart.cart);
     <SafeAreaProvider>
       <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: '#000',
-        inactiveTintColor: 'orange',
+        activeTintColor: '#ea8c20',
         showLabel: true,
       }}
 

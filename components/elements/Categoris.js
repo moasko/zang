@@ -17,7 +17,7 @@ function ViewAll() {
       <Text style={{ color: "#fff", fontWeight: "700" }}>PRODUISTS</Text>
 
       <Pressable onPress={() => navigation1.navigate('allProducts')}>
-        <Text style={{ color: "#fff" }}>Voir Tout</Text>
+        <Text style={{ color: "#fff" }}>Voir Plus</Text>
       </Pressable>
     </View>
   )

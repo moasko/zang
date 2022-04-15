@@ -7,7 +7,6 @@ import { getAllProducts } from '../utils/backend/products';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/actions/products';
 import ProductsListe from '../components/ProductCard/ProductsListe';
-import { useNavigation } from '@react-navigation/native';
 
 
 
