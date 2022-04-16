@@ -11,7 +11,7 @@ const Data = [
 
 const Item = ({ item }) => {
     return (
-        <View style={{marginLeft:2,marginRight:2}}>
+        <View accessible={true} style={{marginLeft:2,marginRight:2}}>
             <Image
                 style={{
                     flex: 1,

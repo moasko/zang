@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView, Dimensions, Pressable } from 'react-native';
+import { ActivityIndicator, Text, View, FlatList, StyleSheet, StatusBar, SafeAreaView} from 'react-native';
 import Item from '../components/ProductCard/ProductCard';
 import PARAMS from '../config/contes';
 import { useSelector, useDispatch } from 'react-redux';
 import { searchProductsAction } from '../redux/actions/products'
 import SearchBar from "react-native-dynamic-search-bar";
-
 import { searchProduct } from '../utils/backend/products';
+
 
 function ProductsSearchScreen({ navigation }) {
   const [isloading, setLoading] = useState(false)
@@ -73,21 +73,22 @@ const searchProducts = async (search) => {
         returnKeyType="search"
         accessibilityTraits="search"
         accessibilityRole="search"
+        style={styles.searchBar}
         value={search}
         onCancel={() => setSearch('')}
         onSubmitEditing={() =>{
            searchProducts(search)
-           console.log(search)
         }}
       />
 </View>
 {/*empty productsList view*/}
 {productsList.length === 0 && !isloading && (
   <View style={{
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#fff',
+    height: '90%',
   }}>
     <Text style={{
       fontSize: 20,
@@ -131,6 +132,13 @@ const searchProducts = async (search) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  searchBar: {
+    backgroundColor: '#fff',
+   height: 50,
+   width: '100%',
+   borderWidth: 1,
+    borderColor: PARAMS.primaryColor,
   }
 });
 

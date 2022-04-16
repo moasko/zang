@@ -58,15 +58,17 @@ let vue = useRef(true);
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 10,
         backgroundColor: "#000",
         padding: 10,
+        height:48
       }}>
         <Text style={{
           color: "#fff",
           fontWeight: "bold",
           fontSize: 15,
-          marginRight: 10
+          marginRight: 10,
+          width: "100%",
+          textAlign: "center"
         }}>Voir plus</Text>
       </TouchableOpacity>
     )

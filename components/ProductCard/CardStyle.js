@@ -42,8 +42,8 @@ const Style = {
   },
   addToCartBtn: {
     borderRadius: 50,
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
     backgroundColor: "#000",
     justifyContent: 'center',
     alignItems: 'center',

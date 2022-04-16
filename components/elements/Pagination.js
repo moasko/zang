@@ -17,8 +17,8 @@ export default function Pagination({ page,setPrev,setNext }) {
             onPress={setPrev}
              style={{
                 width: '35%',
-                height: 40,
-                borderRadius: 20,
+                height: 50,
+                borderRadius: 30,
                 backgroundColor: '#fff',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -53,8 +53,8 @@ export default function Pagination({ page,setPrev,setNext }) {
             onPress={setNext}
             style={{
                 width: '35%',
-                height: 40,
-                borderRadius: 20,
+                height: 50,
+                borderRadius: 30,
                 backgroundColor: '#fff',
                 justifyContent: 'center',
                 alignItems: 'center',

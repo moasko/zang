@@ -191,7 +191,7 @@ const OrderScreen = ({ route }) => {
           <Text style={styles.inputLabel}>Nom</Text>
           <TextInput
             style={styles.inputStyle}
-            placeholder="Nom"
+            placeholder="Votre Nom"
             onChangeText={setNom}
             value={nom}
           />
@@ -199,7 +199,7 @@ const OrderScreen = ({ route }) => {
           <Text style={styles.inputLabel}>Prenom</Text>
           <TextInput
             style={styles.inputStyle}
-            placeholder="Prenom"
+            placeholder="Votre Prenom"
             onChangeText={setPrenom}
             value={prenom}
           />
@@ -211,7 +211,7 @@ const OrderScreen = ({ route }) => {
             dataDetectorTypes="phoneNumber"
             autoCompleteType="tel"
             style={styles.inputStyle}
-            placeholder="Téléphone 1"
+            placeholder="Telephone Principal"
             onChangeText={setTel1}
             value={tel1}
           />
@@ -221,7 +221,7 @@ const OrderScreen = ({ route }) => {
             keyboardType="number-pad"
             dataDetectorTypes="phoneNumber"
             style={styles.inputStyle}
-            placeholder="Téléphone 2"
+            placeholder="Un deuxième téléphone"
             onChangeText={setTel2}
             value={tel2}
           />
@@ -229,7 +229,7 @@ const OrderScreen = ({ route }) => {
           <Text style={styles.inputLabel}>Lieu de livraison</Text>
           <TextInput
             style={styles.inputStyle}
-            placeholder="Lieu de livraison"
+            placeholder="Votre Lieu de livraison"
             onChangeText={setLieu}
             value={lieu}
           />
@@ -277,7 +277,7 @@ const OrderScreen = ({ route }) => {
 const styles = StyleSheet.create({
   inputStyle: {
     marginBottom: 10,
-    padding: 10,
+    padding: 12,
     borderWidth: 1,
     borderColor: "#ebebeb",
     backgroundColor: "#fff",

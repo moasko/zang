@@ -44,12 +44,15 @@ const Item = ({ id, url, name, prix, preprix, categories, permalink, description
   }
 
 
-
   return (
     <Pressable
       style={Style.item}
       onPress={() => handleSelectProduct()} >
-      <Image style={Style.productImage} source={{ uri: url }} />
+      <Image style={Style.productImage} 
+      resizeMode="contain"
+      source={{
+         uri: url!==null?url:PARAMS.PROUCTS_IMG_PLACEHOLDER
+        }} />
       <View style={Style.productInfo}>
         
       {/* <View style={Style.badg}>

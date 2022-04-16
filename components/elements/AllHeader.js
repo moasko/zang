@@ -17,6 +17,7 @@ const AllHeader = ({title}) => {
             flexDirection: 'row',
         }}>
             <Text style={{
+                textTransform: 'capitalize',
                 color: '#000',
                 fontSize: 20,
                 textAlign: 'center',
@@ -30,13 +31,13 @@ const AllHeader = ({title}) => {
                 alignSelf: "flex-end",
                 backgroundColor: "#ebebeb",
                 borderRadius: 50,
-                width: 40,
-                height: 40,
+                width: 45,
+                height: 45,
                 justifyContent: "center",
                 alignItems: "center"
             }}
                 onPress={() => navigation.push("panier")}>
-                <Badge value={cart.length} status="error" containerStyle={{ position: "absolute", top: -5, right: -5 }} />
+                <Badge value={cart.length} status="error" containerStyle={{ position: "absolute", top: -3, right: -3 }} />
                 <MaterialCommunityIcons name="basket" color={"#000"} size={20} />
             </TouchableOpacity>
         </View>
