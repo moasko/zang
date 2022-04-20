@@ -24,6 +24,7 @@ export default function Panier({ route }) {
 
 
 
+
   const navigation = useNavigation();
   
   const handleDelete = (id) => {
@@ -47,9 +48,14 @@ export default function Panier({ route }) {
     }
   }
 
+const curency = (number) => {
+  return number.toLocaleString('fr-FR');
+}
 
 
   const panierPlain = () => {
+
+
     return (
       <View style={{ flex: 1, backgroundColor: '#fff', padding: 10 }}>
         <ScrollView style={{
@@ -114,7 +120,7 @@ export default function Panier({ route }) {
           <Text style={{
             fontSize: 20,
             fontWeight: 'bold',
-          }}>Total : {total} {PARAMS.DEVIS}</Text>
+          }}>Total : {curency(total)} {PARAMS.DEVIS}</Text>
         </View>
 
         <Pressable onPress={() => navigation.navigate('order',{order})}  style={{

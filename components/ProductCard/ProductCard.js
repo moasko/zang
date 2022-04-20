@@ -4,10 +4,10 @@ import Style from './CardStyle'
 import PARAMS from '../../config/contes';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 //redux
-import { addToCart} from "../../redux/actions/products";
+import { addToCart } from "../../redux/actions/products";
 
 
 function showToast(message) {
@@ -48,35 +48,45 @@ const Item = ({ id, url, name, prix, preprix, categories, permalink, description
     <Pressable
       style={Style.item}
       onPress={() => handleSelectProduct()} >
-      <Image style={Style.productImage} 
-      resizeMode="contain"
-      source={{
-         uri: url!==null?url:PARAMS.PROUCTS_IMG_PLACEHOLDER
+      <Image style={Style.productImage}
+        resizeMode="contain"
+        source={{
+          uri: url !== null ? url : PARAMS.PROUCTS_IMG_PLACEHOLDER
         }} />
       <View style={Style.productInfo}>
-        
-      {/* <View style={Style.badg}>
+
+        {/* <View style={Style.badg}>
         <Text style={{ color: "#ff0000" }}>-{Math.round((prix * 100) / preprix)}%</Text>
       </View> */}
-      
-      <View style={Style.title}>
-        <Text numberOfLines={1} style={{ fontSize: 16, fontWeight: "bold" }}>{name}</Text>
-        <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
-      </View>
-      <View style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "100%",
-      }}>
-        <Text style={{ color: "#e84500", fontSize: 15, fontWeight: "bold" }}>{prix} {PARAMS.DEVIS}</Text>
-        <Pressable onPress={() => addToPorductsCart()}>
-          <View style={Style.addToCartBtn}>
-            <Text style={{ color: "#fff", fontSize: 15 }}><MaterialCommunityIcons name="basket" color={"#fff"} size={15} /></Text>
+
+        <View style={Style.title}>
+          <Text numberOfLines={1} style={{ fontSize: 16, fontWeight: "bold" }}>{name}</Text>
+          <Text style={{ fontSize: 10, color: "#6e6e6e" }}>{categories}</Text>
+        </View>
+        <View style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+        }}>
+          <View>
+            <Text style={{ color: "#e84500", fontSize: 15, fontWeight: "bold" }}>{prix} {PARAMS.DEVIS}</Text>
+            <Text style={{
+              color: "gray",
+              opacity: 0.5,
+              fontStyle:"italic", 
+             fontSize: 9,
+              fontWeight: "bold"
+            }}>{preprix} {PARAMS.DEVIS}</Text>
           </View>
-        </Pressable>
+
+          <Pressable onPress={() => addToPorductsCart()}>
+            <View style={Style.addToCartBtn}>
+              <Text style={{ color: "#fff", fontSize: 15 }}><MaterialCommunityIcons name="basket" color={"#fff"} size={15} /></Text>
+            </View>
+          </Pressable>
+        </View>
       </View>
-</View>
     </Pressable>
   );
 }

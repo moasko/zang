@@ -18,7 +18,6 @@ const authData = {
 
 
 export const getAllProducts = (curPage,per_page) => {
-    console.log("page"+curPage)
     return new Promise((resolve, reject) => {
         axios.get(ALL_PRODUCTS, {
             auth: authData, 

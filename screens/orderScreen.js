@@ -234,13 +234,6 @@ const OrderScreen = ({ route }) => {
             value={lieu}
           />
 
-          <Text style={styles.inputLabel}>email</Text>
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Votre adresse email"
-            onChangeText={setEmail}
-            value={email}
-          />
 
 
 

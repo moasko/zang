@@ -2,9 +2,9 @@
   "expo": {
     "name": "zangochap",
     "slug": "zangochap",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
-    "icon": "./assets/72x72.png",
+    "icon": "./assets/ic_launcher-web.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -19,20 +19,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "plugins": [
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/48x48.png",
-          "color": "#ffffff"
-        }
-      ]
-    ],
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
       "useNextNotificationsApi": true,
       "package": "com.moasko.zangochap",
       "versionCode": 1

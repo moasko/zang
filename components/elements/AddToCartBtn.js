@@ -17,7 +17,6 @@ const AddToCartBtn = ({ permalink, prix, name}) => {
             'whatsapp://send?text=' + text + '&phone=' + PhoneNumber;
         Linking.openURL(url)
             .then((data) => {
-                console.log(data);
             })
             .catch(() => {
                 alert('Assurez-vous que Whatsapp est installé sur votre appareil');

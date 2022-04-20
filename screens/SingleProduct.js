@@ -74,7 +74,7 @@ function SingleProduct({ route }) {
 
                <AddToCartBtn id={id.toString()} permalink={permalink} prix={prix} name={name} img={url} />
 
-               <Pressable onPress={() => Linking.openURL(`tel:+2250574641453`)}>
+               <Pressable onPress={() => Linking.openURL(`tel:+2252721003875`)}>
                   <View style={{
                      justifyContent: "center",
                      alignItems: "center",
