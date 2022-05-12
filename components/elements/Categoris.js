@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { View, FlatList, StyleSheet, Text, Image, Pressable, SafeAreaView, ActivityIndicator } from 'react-native';
-import PARAMS from '../../config/contes';
-import HeaderImage from './HeaderImage';
+import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  Image,
+  Pressable,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
+import PARAMS from "../../config/contes";
+import HeaderImage from "./HeaderImage";
 //REDUX
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllCategories } from '../../utils/backend/products';
-import { setCategories } from '../../redux/actions/products';
-
-
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCategories } from "../../utils/backend/products";
+import { setCategories } from "../../redux/actions/products";
 
 function ViewAll() {
   const navigation1 = useNavigation();
@@ -16,34 +23,38 @@ function ViewAll() {
     <View style={styles.alllign}>
       <Text style={{ color: "#fff", fontWeight: "700" }}>PRODUISTS</Text>
 
-      <Pressable style={{
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        width: 80,
-      }} onPress={() => navigation1.navigate('allProducts')}>
+      <Pressable
+        style={{
+          height: 50,
+          alignItems: "center",
+          justifyContent: "center",
+          width: 80,
+        }}
+        onPress={() => navigation1.navigate("allProducts")}
+      >
         <Text style={{ color: "#fff" }}>Voir Plus</Text>
       </Pressable>
     </View>
-  )
+  );
 }
 const CateItem = ({ id, title, img }) => {
   const navigation = useNavigation();
   return (
     <Pressable
       style={styles.item}
-      onPress={() => navigation.navigate('ViewCat', { id: id, title: title })}>
+      onPress={() => navigation.navigate("ViewCat", { id: id, title: title })}
+    >
       <View style={styles.contour}>
         <Image
           style={styles.img}
           source={{
-            uri: img
+            uri: img,
           }}
         />
       </View>
       <Text style={styles.title}>{title}</Text>
     </Pressable>
-  )
+  );
 };
 
 const Cates = () => {
@@ -51,46 +62,54 @@ const Cates = () => {
 
   const dispatch = useDispatch();
 
-  const categories = useSelector(state => state.categories.categories);
-
+  const categories = useSelector((state) => state.categories.categories);
 
   useEffect(() => {
     setLoading(true);
-    getAllCategories().then(res => {
+    getAllCategories().then((res) => {
       dispatch(setCategories(res));
       setLoading(false);
     });
   }, []);
 
-
   const CatrenderItem = ({ item }) => (
     <CateItem
       id={item.id}
       title={item.name}
-      img={(item.image != undefined) ? item.image.src : PARAMS.PROUCTS_IMG_PLACEHOLDER}
+      img={
+        item.image != undefined
+          ? item.image.src
+          : PARAMS.PROUCTS_IMG_PLACEHOLDER
+      }
     />
   );
 
   return (
-    <SafeAreaView
-    
-    >
+    <SafeAreaView>
       <HeaderImage />
-      {isLoading ? <View style={{ flex: 1, justifyContent: "center", alignItems: "center", height: 150 }}>
-        <ActivityIndicator size="large" color="#f77918" />
-      </View>
-        : (
-          <FlatList
-            data={categories}
-            renderItem={CatrenderItem}
-            keyExtractor={item => item.id.toString()}
-            horizontal={true}
-          />
-        )}
+      {isLoading ? (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            height: 150,
+          }}
+        >
+          <ActivityIndicator size="large" color="#f77918" />
+        </View>
+      ) : (
+        <FlatList
+          data={categories}
+          renderItem={CatrenderItem}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+        />
+      )}
       <ViewAll />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   img: {
@@ -99,14 +118,14 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderBottomLeftRadius: 50,
     borderTopRightRadius: 50,
-    borderBottomRightRadius: 50
+    borderBottomRightRadius: 50,
   },
   item: {
     flex: 1,
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     marginHorizontal: 5,
-    marginVertical: 25
+    marginVertical: 25,
   },
   contour: {
     borderTopLeftRadius: 50,
@@ -114,7 +133,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
     padding: 3,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -127,25 +146,24 @@ const styles = StyleSheet.create({
   title: {
     borderRadius: 10,
     marginTop: 5,
-    backgroundColor: '#e76300',
-    color: '#fff',
+    backgroundColor: "#e76300",
+    color: "#fff",
     paddingVertical: 5,
     paddingHorizontal: 10,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 9,
     borderWidth: 2,
-    borderColor: '#fff'
-
+    borderColor: "#fff",
   },
   alllign: {
     width: PARAMS.SCREEN_WIDTH,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
     paddingRight: 10,
     paddingLeft: 10,
-    backgroundColor: 'red',
-  }
+    backgroundColor: "red",
+  },
 });
 
 export default Cates;

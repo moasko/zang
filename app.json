@@ -2,7 +2,7 @@
   "expo": {
     "name": "zangochap",
     "slug": "zangochap",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/ic_launcher-web.png",
     "splash": {
@@ -21,8 +21,8 @@
     },
     "android": {
       "useNextNotificationsApi": true,
-      "package": "com.moasko.zangochap",
-      "versionCode": 1
+      "package": "com.zang.zangochap",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
